@@ -1,0 +1,48 @@
+.pray-cart {
+    width: 150px;
+    /* padding: 15px; */
+    border: 2px solid #deffdf;
+    border-radius: 10px;
+    box-shadow: 0 0.5px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    background-color: #f9f9f9;
+    font-family: 'Arial', sans-serif;
+}
+
+h4 {
+    color: #4CAF50;
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+h3{
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 5px;
+}
+.pray-cart div{
+    margin-bottom: 10px;
+    
+}
+.pray-cart:hover{
+
+    transform: scale(1.1);
+    background-color: #fafafa;
+    cursor: pointer;
+}
+
+.prayer-time {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+@media  screen and (max-width:668px) {
+
+    .pray-cart{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+
+    }
+}

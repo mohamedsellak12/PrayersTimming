@@ -1,0 +1,59 @@
+/* Style principal */
+.surah-list-container {
+    text-align: center;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+}
+
+.surah-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+   
+}
+.name{
+    display: flex;
+    justify-content: space-between;
+}
+
+.surah-item {
+    border: 1px solid black ;
+    padding: 15px;
+    margin: 10px 0px;
+    background-color: #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.surah-item h3 {
+    color: #007BFF;
+}
+@media screen and (max-width: 1300px){
+    .surah-item {
+        width: 750px;
+    }
+}
+
+@media screen and (max-width: 968px) {
+    .surah-item {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .surah-item {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .surah-item {
+        width: 200px;
+    }
+}

@@ -1,0 +1,7 @@
+<h1>بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</h1>
+<h2>{{ complateSurah }}</h2>
+
+<div class="links">
+    <a routerLink="/surah/{{ id + 1}}" *ngIf="id<114">Next</a><br>
+    <a routerLink="/surah/{{ id - 1}}" *ngIf="id>1">Prev</a>
+</div>

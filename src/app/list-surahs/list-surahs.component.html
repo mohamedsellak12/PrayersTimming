@@ -1,0 +1,21 @@
+<div class="surah-list-container">
+    <!-- Liste des sourates -->
+    <ul class="surah-list">
+        <li *ngFor="let surah of surahs"  >
+            <div class="surah-item" routerLink="/surah/{{ surah.id }}">
+                <div >
+                    <p><strong>Versets :</strong> {{ surah.verses_count }}</p>
+                    <p><strong>Révélation :</strong> {{ surah.revelation_place }}</p>
+                   </div>
+                   <div class="name" >
+                       <h3>   {{ surah.name_arabic }}. </h3>
+                       <h4>{{ surah.id }}</h4>
+                   </div>
+            </div>
+            
+            <!-- Bouton pour afficher la sourate complète -->
+            <!-- <button >Voir la sourate</button> -->
+        </li>
+    </ul>
+</div>
+
