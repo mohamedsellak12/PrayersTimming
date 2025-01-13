@@ -1,6 +1,7 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ListSurahsComponent } from './list-surahs/list-surahs.component';
 import { SurahComponent } from './surah/surah.component';
+import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
     {

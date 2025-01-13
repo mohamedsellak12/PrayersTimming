@@ -16,4 +16,10 @@ export class QoranService {
   getSurah(id:any):Observable<any> {
     return this.http.get(`${this.urlapi}/quran/verses/uthmani?chapter_number=${id}`);
   }
+  getSurahInfo(id:any):Observable<any>{
+    return this.http.get(`${this.urlapi}/chapters/${id}`);
+  }
+  getAudioOfSurah(ID:any,id:any):Observable<any>{
+    return this.http.get(`${this.urlapi}/chapter_recitations/${ID}/${id}`);
+  }
 }

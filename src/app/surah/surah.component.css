@@ -1,32 +1,234 @@
-:host{
-    width: 50%;
-    background-color: #ddd;
-    border-radius: 10px ;
-    padding: 10px 10px;
+:host {
+    width: 60%;
+    background: #ddd ;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    margin: auto;
+    animation: fadeIn 0.8s ease-in;
+    text-align: center;
+}
+
+
+.surah-title {
+    font-size: 2.5rem;
+    color: #0275d8;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.surah-content  {
+    font-size: 1.3rem;
+    color: #444;
+    text-align: center;
+    line-height: 2;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #FFF5E1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Navigation Links Styling */
+.navigation-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding: 10px 0;
+}
+
+.nav-link {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.prev-link {
+    background-color: whitesmoke;
+    color: gray;
+}
+
+.next-link {
+    background-color: whitesmoke;
+    color: bgraylack;
+}
+
+.nav-link:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+#reciter {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+    grid-template-rows: repeat(5, auto);  /* 5 lignes */
+    gap: 20px; /* Espacement entre les éléments */
+    padding: 20px;
     
-
+}
+img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.reciter-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: #f9f9f9;
 }
 
-h2{
-    font-size: 30px;
-    margin: 10px;
-    padding: 15px 15px;
-}
-@media screen and (max-width:1200px) {
-    :host{
-        width: 70%;
-    }
-    
+.reciter-item button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
 }
 
-@media screen and (max-width:668px) {
-    :host{
-        width: 100%;
-        height: 100vh;
-    }
-    h2{
-        font-size: 25px;
-        padding: 0px 0px;
-    }
+.reciter-item button:hover {
+    background-color: #0056b3;
+}
+
+/* Conteneur principal */
+.surah-info-container {
+    display: flex;
+    justify-content: space-around;
+    background: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* max-width: 300px; */
+    margin: 20px auto;
+    text-align: center; /* Alignement du texte arabe */
+
+    line-height: 1.8;
+    direction: rtl; /* Alignement RTL pour l'arabe */
+}
+
+/* Style des titres */
+.surah-info-container h4 {
+    /* font-size: 28px; */
+    color: #2c3e50;
+    /* margin-bottom: 10px; */
+    /* border-bottom: 2px solid #007BFF; */
+    /* padding-bottom: 5px; */
+}
+
+/* Style des paragraphes */
+.surah-info-container p {
+    /* font-size: 20px; */
+    color: #333;
+    margin: 10px 0;
+}
+
+/* Mise en valeur des textes importants */
+.surah-info-container strong {
+    color: #007BFF;
+    font-weight: bold;
+}
+
+.btn-link{
+    /* background-color: #c1cbc9;  */
+    color: rgb(18, 18, 18);
+    text-decoration: underline;
+    font-size: 1.9rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   
+}
+.surah-info-container .div{
+    font-size: 1.9em;
+}
+.div .Lien{
+    color: #007BFF;
+    text-decoration: underline;
+    font-size: 1.4rem;
+    cursor: pointer;
  
+   
+}
+.Lien{
+    cursor: pointer;
+    transition: color 0.3s;
+    text-decoration: underline;
+    color: #007BFF;
+    margin-top: 15px;
+    font-size: 1.4rem;
+    margin-right: 20px;
+
+}
+
+
+/* Media Queries pour le responsive design */
+@media screen and (max-width: 1200px) {
+    :host {
+        width: 80%;
+    }
+
+    .surah-title {
+        font-size: 2rem;
+    }
+
+    .surah-content h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :host {
+        width: 95%;
+        padding: 15px;
+    }
+    #reciter{
+        display: block;
+        justify-self:center;
+    }
+    .reciter-item {
+        width: 100%;
+        margin-bottom: 10px;
+
+    }
+    .surah-title {
+        font-size: 1.8rem;
+    }
+
+    .surah-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .navigation-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-link {
+        text-align: center;
+    }
+}
+
+/* Animation pour un effet d'apparition */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -1,7 +1,63 @@
-<h1>بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</h1>
-<h2>{{ complateSurah }}</h2>
+<div class="surah-container">
+    <div  class="surah-info-container">
+      
+       <div class="div">
+        <a routerLink="/chapters" class="Lien" >فهرس القرآن</a> | سورة {{ surahInfo.name_arabic }}
+         {{ surahInfo.revelation_place ==="makkah"?"مكية":"مدنية" }} | رقم السورة: {{ surahInfo.id }} - عدد آياتها : {{ surahInfo.verses_count }}  - اسمها بالانجليزي : {{ surahInfo.translated_name.name }}
+       </div>
+       <hr>
+       <a (click)="scrollToSection('reciter')" class="Lien">الإستماع</a>
+        
 
-<div class="links">
-    <a routerLink="/surah/{{ id + 1}}" *ngIf="id<114">Next</a><br>
-    <a routerLink="/surah/{{ id - 1}}" *ngIf="id>1">Prev</a>
+    </div>
+  
+    
+    <!-- Contenu de la sourate -->
+    <div class="surah-content">
+        <h1 class="surah-title" *ngIf="surahInfo.name_arabic!=='التوبة' "><span *ngIf="surahInfo.name_arabic!=='الفاتحة'">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</span></h1>
+        <h2>{{ complateSurah }}</h2>
+    </div>
+
+    <!-- Navigation entre les sourates -->
+    <div class="navigation-links">
+        <a 
+        (click)="navigateAndReload(id-1)"
+        
+           
+            *ngIf="id > 1" 
+            class="nav-link prev-link">
+          <p>  السابقة</p>
+          <strong>  {{"سورة"+" "+prevChapiter }}</strong>
+        </a>
+        <a (click)="scrollToTop()"
+        class="nav-link scroll-top-link"
+        > <i  class="fas fa-arrow-up"></i>
+    </a>
+        <a 
+        (click)="navigateAndReload(id+1)"
+            *ngIf="id < 114" 
+            class="nav-link next-link">
+            <p>التالية</p>
+          <strong>{{ "سورة"+" "+nextChapiter }}</strong>
+           
+        </a>
+    </div>
+   
+    <div id="reciter">
+        <div *ngFor="let r  of reciters" class="reciter-item">
+            <div>
+                <p>{{ r.name }} </p>
+                <button (click)="scrollToSection('audio')" (click)="playAudio(r.id) " >  إستمع الآن لسورة {{ surahInfo.name_arabic }}</button>
+            </div>
+            <img src="/reciters/{{ r.id }}.png" >
+        </div>
+    </div>
+    <br><br><br>
+
+    <div id="audio" *ngIf="audioUrl">
+        <audio [src]="audioUrl" controls autoplay>
+        </audio>
+        
+    </div>
+        
 </div>

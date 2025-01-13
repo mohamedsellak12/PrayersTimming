@@ -1,15 +1,18 @@
 <div class="surah-list-container">
+    <div>
+        <h1>فهرس القرآن الكريم </h1>
+    </div>
     <!-- Liste des sourates -->
     <ul class="surah-list">
         <li *ngFor="let surah of surahs"  >
             <div class="surah-item" routerLink="/surah/{{ surah.id }}">
                 <div >
-                    <p><strong>Versets :</strong> {{ surah.verses_count }}</p>
-                    <p><strong>Révélation :</strong> {{ surah.revelation_place }}</p>
+                    <p><strong>عدد آياتها :</strong> {{ surah.verses_count }}</p>
+                   
                    </div>
                    <div class="name" >
-                       <h3>   {{ surah.name_arabic }}. </h3>
-                       <h4>{{ surah.id }}</h4>
+                       <h2>   {{ surah.name_arabic }}. </h2>
+                       <h2>{{ surah.id }}</h2>
                    </div>
             </div>
             
@@ -17,5 +20,7 @@
             <!-- <button >Voir la sourate</button> -->
         </li>
     </ul>
+    <!-- Navigation entre les reciters -->
+   
 </div>
 

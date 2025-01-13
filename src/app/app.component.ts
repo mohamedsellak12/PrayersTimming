@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 // import { RouterOutlet } from '@angular/router';
 import { PrayCartComponent } from "./pray-cart/pray-cart.component";
 import { PrayTimmingService } from './services/pray-timming.service';
@@ -21,7 +21,8 @@ export class AppComponent implements OnInit  {
   nextPrayer?:{name: string; time: Date} ;
   countdown:string=''
   isQoranRoute: boolean=false;
-  isSurahRoute:boolean=false
+  isSurahRoute:boolean=false ;
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
 
   constructor(private prayTimmingService:PrayTimmingService , private router:Router){
@@ -48,7 +49,7 @@ export class AppComponent implements OnInit  {
         next: (data) => {
           this.prayerTimes=data.data;
           // this.loading=false;
-          console.log(data.data);
+          // console.log(data.data);
           this.nextPrayer=this.prayTimmingService.getNextPrayerTimes(this.prayerTimes);
           this.startCountdown();
         },
@@ -63,30 +64,39 @@ export class AppComponent implements OnInit  {
    
   }
   startCountdown() {
-    setInterval(() => {
-      const now = new Date();
-      if(this.nextPrayer){
-        
-        const diff = this.nextPrayer.time.getTime() - now.getTime();
-        console.log(diff)
-        console.log(this.nextPrayer)
-  
-        if (diff == 0) {
-          this.countdown = "Time for " + this.nextPrayer.name + "!";
-        }else if(diff<0){
-          this.countdown = "Prayer time ended today!";
-          this.nextPrayer = undefined;
-        }else {
-          const hours = Math.floor(diff / (1000 * 60 * 60));
-          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-          this.countdown = `-${hours.toString().padStart(2,"0")} 
-          : ${minutes.toString().padStart(2,"0")} : 
-          ${seconds.toString().padStart(2,"0")}`;
+    const countdownInterval = setInterval(() => {
+        const now = new Date();
+        if (this.nextPrayer) {
+            const diff = this.nextPrayer.time.getTime() - now.getTime();
+            // console.log(diff)
+            if (diff <= 1000 && diff > 0) {
+                this.countdown = "Time for " + this.nextPrayer.name + "!";
+                
+                // Automatically play audio
+                this.audioPlayer.nativeElement.play().catch((error:any) => {
+                    console.error('Audio playback error:', error);
+                });
+                
+                clearInterval(countdownInterval); // Stop countdown after playing audio
+            } else if (diff < 0) {
+                this.countdown = "Prayer time ended today!";
+                this.nextPrayer = undefined;
+                clearInterval(countdownInterval); // Stop countdown
+            } else {
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                this.countdown = `-${hours.toString().padStart(2, "0")}:
+                                  ${minutes.toString().padStart(2, "0")}:
+                                  ${seconds.toString().padStart(2, "0")}`;
+            }
+        } else {
+            clearInterval(countdownInterval); // No prayer found, stop countdown
         }
-      }
-      }, 1000);
-    }
+    }, 1000);
+}
+
   }
 
 
