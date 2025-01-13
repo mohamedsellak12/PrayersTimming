@@ -3,7 +3,9 @@
   <h2>{{ prayerTimes.date.hijri.weekday.ar }} {{ prayerTimes.date.hijri.day }} {{ prayerTimes.date.hijri.month.ar }} {{ prayerTimes.date.hijri.year }}</h2>
   <p *ngIf="!loading && !prayerTimes">Détection de votre localisation...</p>
   <h3>{{ nextPrayer?.name }}</h3>
-  <h3>{{ countdown }}</h3>
+  <h3 *ngIf="countdown">{{ countdown }}</h3>
+  <h3 *ngIf="!countdown">{{ adhanMessage }}</h3>
+  <button *ngIf="adhanMessage" (click)="stopAlAdhan()">إيقاف</button>
   <h2 *ngIf="city"><i class="fas fa-map-marker-alt"></i> {{ city }} , {{ country }} </h2>
 
   <div *ngIf="prayerTimes" class="prayer-container">

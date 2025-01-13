@@ -19,9 +19,10 @@ export class AppComponent implements OnInit  {
   prayerTimes : any;
   loading :boolean =true
   nextPrayer?:{name: string; time: Date} ;
-  countdown:string=''
+  countdown:string|null=''
   isQoranRoute: boolean=false;
   isSurahRoute:boolean=false ;
+  adhanMessage: string|null='';
   @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
 
@@ -68,10 +69,10 @@ export class AppComponent implements OnInit  {
         const now = new Date();
         if (this.nextPrayer) {
             const diff = this.nextPrayer.time.getTime() - now.getTime();
-            // console.log(diff)
+            console.log(diff)
             if (diff <= 1000 && diff > 0) {
-                this.countdown = "Time for " + this.nextPrayer.name + "!";
-                
+                this.countdown = null;
+                this.adhanMessage="Time for " + this.nextPrayer.name + "!"
                 // Automatically play audio
                 this.audioPlayer.nativeElement.play().catch((error:any) => {
                     console.error('Audio playback error:', error);
@@ -95,6 +96,10 @@ export class AppComponent implements OnInit  {
             clearInterval(countdownInterval); // No prayer found, stop countdown
         }
     }, 1000);
+}
+stopAlAdhan(){
+  window.location.reload();
+
 }
 
   }

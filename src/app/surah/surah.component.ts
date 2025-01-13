@@ -92,7 +92,11 @@ scrollToSection(sectionId: string) {
 playAudio(id:any){
   this.qoranService.getAudioOfSurah(id,this.id).subscribe({
     next: (audio) => {
-      this.audioUrl = audio.audio_file.audio_url
+      if(audio.audio_file.audio_url){
+        this.audioUrl = audio.audio_file.audio_url;
+      }else{
+        this.audioUrl = '';
+      }
     },
     error: (error) => {
       console.error('Error fetching audio', error);
