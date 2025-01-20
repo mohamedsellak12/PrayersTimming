@@ -87,6 +87,30 @@ h3 {
 app-pray-cart {
     display: block; /* Pour s'assurer que le composant s'affiche comme un bloc */
 }
+.stop-button {
+    background-color: #d9534f; /* Rouge élégant pour l'arrêt */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s;
+    font-weight: bold;
+    direction: rtl;
+}
+
+.stop-button:hover {
+    background-color: #c9302c; /* Rouge plus foncé au survol */
+    transform: scale(1.05);
+}
+
+.stop-button:active {
+    background-color: #a94442;
+    transform: scale(0.98);
+}
+
 @media screen and (max-width: 1300px){
     .prayer-list {
         display: grid;

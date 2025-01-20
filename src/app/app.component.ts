@@ -31,7 +31,7 @@ export class AppComponent implements OnInit  {
   }
    async ngOnInit() {
     this.router.events.subscribe(()=>{
-      this.isQoranRoute=this.router.url ==="/chapters"
+      this.isQoranRoute=this.router.url ==="/chapters" || this.router.url ==="/search" 
     })
     this.router.events.subscribe(()=>{
       this.isSurahRoute=this.router.url.includes("/surah")
@@ -72,12 +72,11 @@ export class AppComponent implements OnInit  {
             console.log(diff)
             if (diff <= 1000 && diff > 0) {
                 this.countdown = null;
-                this.adhanMessage="Time for " + this.nextPrayer.name + "!"
+                this.adhanMessage="Time for :" + this.nextPrayer.name + "!"
                 // Automatically play audio
-                this.audioPlayer.nativeElement.play().catch((error:any) => {
-                    console.error('Audio playback error:', error);
+                this.audioPlayer.nativeElement.play().catch((error:any) => { 
+                    console.error('Audio playback error:', error);  
                 });
-                
                 clearInterval(countdownInterval); // Stop countdown after playing audio
             } else if (diff < 0) {
                 this.countdown = "Prayer time ended today!";

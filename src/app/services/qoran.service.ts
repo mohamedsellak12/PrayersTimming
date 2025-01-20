@@ -22,4 +22,7 @@ export class QoranService {
   getAudioOfSurah(ID:any,id:any):Observable<any>{
     return this.http.get(`${this.urlapi}/chapter_recitations/${ID}/${id}`);
   }
+  search(query:string):Observable<any>{
+    return this.http.get<any>(`${this.urlapi}/search?q=${query}`);
+  }
 }

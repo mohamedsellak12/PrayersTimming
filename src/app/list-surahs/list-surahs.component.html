@@ -1,7 +1,9 @@
 <div class="surah-list-container">
-    <div>
-        <h1>فهرس القرآن الكريم </h1>
+    <div style="display: flex; justify-content: space-around;">
+        <button class="home-button" [routerLink]="'/'"> الرئيسية</button>
+        <!-- <button class="home-button" [routerLink]="'/search'"> search </button> -->
     </div>
+    <h1>فهرس القرآن الكريم </h1>
     <!-- Liste des sourates -->
     <ul class="surah-list">
         <li *ngFor="let surah of surahs"  >

@@ -13,6 +13,10 @@
     text-align: center;
    
 }
+.surah-item:hover{
+    transform: scale(1.009);
+
+}
 .name{
     display: flex;
     justify-content: space-between;
@@ -29,11 +33,40 @@
     width: 1000px;
     display: flex;
     justify-content: space-between;
+    transition: all 0.3s ease-in-out;
 }
 
 .surah-item h2 {
     color: #007BFF;
 }
+.home-button {
+    background-color: #1abc9c; 
+    
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.home-button:hover {
+    background-color: #16a085; /* Vert plus foncé */
+
+    transform: scale(1.05);      
+}
+
+.home-button:active {
+    background-color: #148f77;
+
+    transform: scale(0.95);      
+}
+
 @media screen and (max-width: 1300px){
     .surah-item {
         width: 750px;

@@ -96,6 +96,8 @@ img{
     background-color: #007BFF;
     color: white;
     cursor: pointer;
+    font-style: oblique;
+    font-size: large;
 }
 
 .reciter-item button:hover {
@@ -118,7 +120,7 @@ img{
     direction: rtl; /* Alignement RTL pour l'arabe */
 }
 
-/* Style des titres */
+
 .surah-info-container h4 {
     /* font-size: 28px; */
     color: #2c3e50;
@@ -141,7 +143,7 @@ img{
 }
 
 .btn-link{
-    /* background-color: #c1cbc9;  */
+
     color: rgb(18, 18, 18);
     text-decoration: underline;
     font-size: 1.9rem;
@@ -186,6 +188,9 @@ img{
     .surah-content h2 {
         font-size: 1.5rem;
     }
+    .reciter-item button{
+        font-size: small;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -196,6 +201,7 @@ img{
     #reciter{
         display: block;
         justify-self:center;
+        width: 80%;
     }
     .reciter-item {
         width: 100%;
@@ -217,6 +223,10 @@ img{
 
     .nav-link {
         text-align: center;
+    }
+    .reciter-item button{
+        font-size: smaller
+        ;
     }
 }
 

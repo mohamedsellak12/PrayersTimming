@@ -1,0 +1,27 @@
+<div class="search-container">
+    <button (click)="performSearch()" class="search-button">
+        <i class="fa fa-search"></i> 
+    </button>
+    <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        (keyup.enter)="performSearch()" 
+        placeholder="...ابحث في القرآن"
+        class="search-input"
+    />
+  
+</div>
+
+<div *ngIf="results.length > 0" class="results-container">
+    <h3></h3>
+    <div *ngFor="let result of results">
+
+        <ul>
+            <h3 >
+                {{ result.text }} <strong>({{ result.verse_key.split(":")[1] }})</strong>
+            </h3>
+            <h1>{{ surahName}}</h1>
+        </ul>
+
+    </div>
+</div>
