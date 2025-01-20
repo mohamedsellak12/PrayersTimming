@@ -77,11 +77,7 @@ export class AppComponent implements OnInit  {
                 this.audioPlayer.nativeElement.play().catch((error:any) => { 
                     console.error('Audio playback error:', error);  
                 });
-                clearInterval(countdownInterval); // Stop countdown after playing audio
-            } else if (diff < 0) {
-                this.countdown = "Prayer time ended today!";
-                this.nextPrayer = undefined;
-                clearInterval(countdownInterval); // Stop countdown
+                clearInterval(countdownInterval);
             } else {
                 const hours = Math.floor(diff / (1000 * 60 * 60));
                 const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));

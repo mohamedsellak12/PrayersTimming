@@ -130,7 +130,9 @@ app-pray-cart {
 
     .prayer-list li {
         flex: 1 1 100%; /* Une colonne sur mobile */
-        max-width: 300px;
+        /* max-width: 300px; */
+        
+       
     }
 
     h1 {
