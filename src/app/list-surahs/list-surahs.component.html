@@ -16,21 +16,29 @@
     <!-- Boucle sur les colonnes inversées desktop -->
     <div *ngFor="let colIndex of cols === 3 ? [2,1,0] : (cols === 2 ? [1,0] : [0])" class="flex flex-col gap-3 md:gap-6">
       <ng-container *ngFor="let row of groupedSurahs">
-        <div
-          *ngIf="row[colIndex]"
-          class="p-4 bg-white text-gray-800 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-gray-200"
-          [routerLink]="'/surah/' + row[colIndex].id"
-        >
-          <div class="flex justify-between items-center mt-2">
-            <p class="text-sm">
-              <strong>عدد آياتها :</strong> {{ row[colIndex].verses_count }}
-            </p>
-            <h2 class="text-lg font-bold">{{ row[colIndex].name_arabic }}</h2>
-          </div>
-          <span class="text-sm bg-gray-100 px-3 py-1 rounded-full text-gray-700">
-            {{ row[colIndex].id }}
-          </span>
-        </div>
+       <div
+  *ngIf="row[colIndex]"
+  class="p-4 bg-white text-gray-800 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-gray-200"
+  [routerLink]="'/surah/' + row[colIndex].id"
+>
+  <div class="flex justify-between items-center">
+      <!-- Nombre de versets -->
+    <p class="text-sm">
+      <strong>عدد آياتها :</strong> {{ row[colIndex].verses_count }}
+    </p>
+
+    <!-- Nom + numéro -->
+    <div class="flex items-center gap-2">
+      <h2 class="text-lg font-bold">{{ row[colIndex].name_arabic }}</h2>
+      <span class="text-sm bg-gray-100 px-3 py-1 rounded-full text-gray-700">
+        {{ row[colIndex].id }}
+      </span>
+    </div>
+
+  
+  </div>
+</div>
+
       </ng-container>
     </div>
   </div>

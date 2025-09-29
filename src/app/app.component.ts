@@ -49,7 +49,7 @@ export class AppComponent implements OnInit  {
       this.prayTimmingService.getPrayerTimes(this.city,this.country).subscribe({
         next: (data) => {
           this.prayerTimes=data.data;
-          // this.loading=false;
+          this.loading=false;
           // console.log(data.data);
           this.nextPrayer=this.prayTimmingService.getNextPrayerTimes(this.prayerTimes);
           this.startCountdown();
