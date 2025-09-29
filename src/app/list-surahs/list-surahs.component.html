@@ -14,7 +14,7 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <!-- Boucle sur les colonnes inversées desktop -->
-    <div *ngFor="let colIndex of cols === 3 ? [2,1,0] : (cols === 2 ? [1,0] : [0])" class="flex flex-col gap-6">
+    <div *ngFor="let colIndex of cols === 3 ? [2,1,0] : (cols === 2 ? [1,0] : [0])" class="flex flex-col gap-3 md:gap-6">
       <ng-container *ngFor="let row of groupedSurahs">
         <div
           *ngIf="row[colIndex]"
