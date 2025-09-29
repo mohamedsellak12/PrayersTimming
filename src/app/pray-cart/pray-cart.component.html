@@ -1,8 +1,14 @@
-<div class="pray-cart">
-    <div>
+<div
+  class="flex flex-row-reverse md:flex-col items-center justify-between bg-white rounded-xl shadow-md p-4 border border-gray-200"
+>
+  <!-- Noms -->
+  <div class="text-end md:text-center">
+    <h4 class="text-lg font-bold text-gray-800">{{ prayNameAr }}</h4>
+    <h3 class="text-sm text-gray-600">{{ prayName }}</h3>
+  </div>
 
-        <h4> {{ prayNameAr }} </h4>
-        <h3> {{ prayName }} </h3>
-    </div>
-    <p class="prayer-time"> {{ prayTime }} </p>
+  <!-- Horaire -->
+  <p class="text-lg sm:text-xl font-mono text-gray-800 bg-green-50 px-3 py-1 rounded-lg shadow-inner">
+    {{ prayTime }}
+  </p>
 </div>

@@ -1,32 +1,81 @@
-<div *ngIf="!isQoranRoute && !isSurahRoute">
-  <h1>﴾ إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا ﴿ </h1>
-  <h2>{{ prayerTimes.date.hijri.weekday.ar }} {{ prayerTimes.date.hijri.day }} {{ prayerTimes.date.hijri.month.ar }} {{ prayerTimes.date.hijri.year }}</h2>
-  <p *ngIf="!loading && !prayerTimes">Détection de votre localisation...</p>
-  <h3>{{ nextPrayer?.name }}</h3>
-  <h3 *ngIf="countdown">{{ countdown }}</h3>
-  <h3 *ngIf="!countdown">{{ adhanMessage }}</h3>
-  <button *ngIf="adhanMessage" (click)="stopAlAdhan()" class="stop-button">
+<div *ngIf="!isQoranRoute && !isSurahRoute" 
+     class="min-h-screen flex flex-col items-center justify-start 
+            bg-gradient-to-b from-green-100 via-white to-green-50 
+            px-4 sm:px-6 lg:px-12 py-8 text-center">
+
+  <!-- Ayah -->
+  <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-800 mb-6 leading-relaxed">
+    ﴾ إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا ﴿
+  </h1>
+
+  <!-- Date Hijri -->
+  <h2 class="text-base sm:text-lg lg:text-xl text-gray-700 mb-8">
+    {{ prayerTimes.date.hijri.weekday.ar }} 
+    {{ prayerTimes.date.hijri.day }} 
+    {{ prayerTimes.date.hijri.month.ar }} 
+    {{ prayerTimes.date.hijri.year }}
+  </h2>
+
+  <!-- Loading -->
+  <p *ngIf="!loading && !prayerTimes" class="text-gray-500 italic mb-4">
+    Détection de votre localisation...
+  </p>
+
+  <!-- Next prayer -->
+  <h3 class="text-xl font-semibold text-green-700 mt-4">
+    {{ nextPrayer?.name }}
+  </h3>
+  <h3 *ngIf="countdown" class="text-2xl sm:text-3xl font-mono text-gray-800 mt-3 tracking-wide">
+    {{ countdown }}
+  </h3>
+  <h3 *ngIf="!countdown && adhanMessage" class="text-xl sm:text-2xl text-red-600 font-bold mt-3 animate-pulse">
+    {{ adhanMessage }}
+  </h3>
+
+  <!-- Stop button -->
+  <button 
+    *ngIf="adhanMessage" 
+    (click)="stopAlAdhan()" 
+    class="mt-5 px-8 py-3 bg-red-600 text-white rounded-full 
+           shadow-lg hover:bg-red-700 hover:shadow-xl 
+           transition-all duration-300 ease-in-out">
     إيقاف
-</button>
+  </button>
 
-  <h2 *ngIf="city"><i class="fas fa-map-marker-alt"></i> {{ city }} , {{ country }} </h2>
+  <!-- City / Country -->
+  <h2 *ngIf="city" class="mt-8 flex items-center justify-center gap-2 text-gray-700 text-lg sm:text-xl font-medium">
+    <i class="fas fa-map-marker-alt text-green-600 text-xl"></i> 
+    {{ city }} , {{ country }}
+  </h2>
 
-  <div *ngIf="prayerTimes" class="prayer-container">
-    <ul class="prayer-list">
-      <li><app-pray-cart prayName="Fajr" prayNameAr="الفجر" [prayTime]="prayerTimes.timings.Fajr"></app-pray-cart></li>
-      <li><app-pray-cart prayName="Sunrise" prayNameAr="الشروق" [prayTime]="prayerTimes.timings.Sunrise"></app-pray-cart></li>
-      <li><app-pray-cart prayName="Dhuhr" prayNameAr="الظهر" [prayTime]="prayerTimes.timings.Dhuhr"></app-pray-cart></li>
-      <li><app-pray-cart prayName="Asr" prayNameAr="العصر" [prayTime]="prayerTimes.timings.Asr"></app-pray-cart></li>
-      <li><app-pray-cart prayName="Maghrib" prayNameAr="المغرب" [prayTime]="prayerTimes.timings.Maghrib"></app-pray-cart></li>
-      <li><app-pray-cart prayName="Isha" prayNameAr="العشاء" [prayTime]="prayerTimes.timings.Isha"></app-pray-cart></li>
+  <!-- Prayer times list -->
+  <div *ngIf="prayerTimes" class="mt-10 w-full max-w-6xl">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8">
+      <li class="p-2"><app-pray-cart prayName="Fajr" prayNameAr="الفجر" [prayTime]="prayerTimes.timings.Fajr"></app-pray-cart></li>
+      <li class="p-2"><app-pray-cart prayName="Sunrise" prayNameAr="الشروق" [prayTime]="prayerTimes.timings.Sunrise"></app-pray-cart></li>
+      <li class="p-2"><app-pray-cart prayName="Dhuhr" prayNameAr="الظهر" [prayTime]="prayerTimes.timings.Dhuhr"></app-pray-cart></li>
+      <li class="p-2"><app-pray-cart prayName="Asr" prayNameAr="العصر" [prayTime]="prayerTimes.timings.Asr"></app-pray-cart></li>
+      <li class="p-2"><app-pray-cart prayName="Maghrib" prayNameAr="المغرب" [prayTime]="prayerTimes.timings.Maghrib"></app-pray-cart></li>
+      <li class="p-2"><app-pray-cart prayName="Isha" prayNameAr="العشاء" [prayTime]="prayerTimes.timings.Isha"></app-pray-cart></li>
     </ul>
+  </div>
+
+  <!-- Quran link -->
+  <div class="mt-12">
+    <a routerLink="/chapters" 
+       class="px-8 py-3 bg-green-700 text-white rounded-lg 
+              shadow-md hover:bg-green-800 hover:shadow-xl 
+              transition-all duration-300 ease-in-out text-lg font-semibold">
+              <i class="fas fa-book-open text-2xl text-green-600"></i>
+              
+      القرآن الكريم
+
+    </a>
   </div>
 </div>
 
-<!-- Lien vers la liste des sourates -->
-<div *ngIf="!isQoranRoute && !isSurahRoute" class="navigation">
-  <a routerLink="/chapters" class="btn-link">القرآن الكريم</a>
-</div>
-<audio #audioPlayer src="a1.mp3" >
-</audio>
+<!-- Audio -->
+<audio #audioPlayer src="a1.mp3"></audio>
+
+<!-- Router outlet -->
 <router-outlet></router-outlet>

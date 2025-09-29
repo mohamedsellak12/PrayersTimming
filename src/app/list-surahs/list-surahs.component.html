@@ -1,28 +1,39 @@
-<div class="surah-list-container">
-    <div style="display: flex; justify-content: space-around;">
-        <button class="home-button" [routerLink]="'/'"> الرئيسية</button>
-        <!-- <button class="home-button" [routerLink]="'/search'"> search </button> -->
-    </div>
-    <h1>فهرس القرآن الكريم </h1>
-    <!-- Liste des sourates -->
-    <ul class="surah-list">
-        <li *ngFor="let surah of surahs"  >
-            <div class="surah-item" routerLink="/surah/{{ surah.id }}">
-                <div >
-                    <p><strong>عدد آياتها :</strong> {{ surah.verses_count }}</p>
-                   
-                   </div>
-                   <div class="name" >
-                       <h2>   {{ surah.name_arabic }}. </h2>
-                       <h2>{{ surah.id }}</h2>
-                   </div>
-            </div>
-            
-            <!-- Bouton pour afficher la sourate complète -->
-            <!-- <button >Voir la sourate</button> -->
-        </li>
-    </ul>
-    <!-- Navigation entre les reciters -->
-   
-</div>
+<div class=" mx-auto px-4 py-6 bg-gradient-to-b from-green-100 via-white to-green-50">
+  <div class="flex justify-center mb-6">
+    <button
+      class="px-6 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg shadow hover:opacity-90 transition"
+      [routerLink]="'/'"
+    >
+      الرئيسية
+    </button>
+  </div>
 
+  <h1 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">
+    فهرس القرآن الكريم
+  </h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Boucle sur les colonnes inversées desktop -->
+    <div *ngFor="let colIndex of cols === 3 ? [2,1,0] : (cols === 2 ? [1,0] : [0])" class="flex flex-col gap-6">
+      <ng-container *ngFor="let row of groupedSurahs">
+        <div
+          *ngIf="row[colIndex]"
+          class="p-4 bg-white text-gray-800 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer border border-gray-200"
+          [routerLink]="'/surah/' + row[colIndex].id"
+        >
+          <div class="flex justify-between items-center mt-2">
+            <p class="text-sm">
+              <strong>عدد آياتها :</strong> {{ row[colIndex].verses_count }}
+            </p>
+            <h2 class="text-lg font-bold">{{ row[colIndex].name_arabic }}</h2>
+          </div>
+          <span class="text-sm bg-gray-100 px-3 py-1 rounded-full text-gray-700">
+            {{ row[colIndex].id }}
+          </span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+
+</div>

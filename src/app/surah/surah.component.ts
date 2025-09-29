@@ -16,6 +16,7 @@ export class SurahComponent implements OnInit {
   nextChapiter: string |null=null
   prevChapiter: string |null=null
   audioUrl: string='';
+  showScrollTop: boolean = false;
   reciters: { id: number; name: string }[] = [
     { id: 7, name: " الشيخ مشاري العفاسي " },
     { id: 24, name: "الشيخ عبد الله علي جابر " },
@@ -78,6 +79,10 @@ ngOnInit(): void {
      
     }
   );
+
+  window.addEventListener('scroll', () => {
+    this.showScrollTop = window.scrollY > 200; // devient visible après 200px de scroll
+  });
 }
 
 
