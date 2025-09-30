@@ -23,7 +23,8 @@ export class AsmaComponent implements OnInit {
     this.loading = true;
     this.prayTimmingService.getAllGodNames().subscribe({
       next: (res) => {
-        this.names = res.data || [];
+        console.log(res)
+        this.names = Array.isArray(res?.data) ? res.data : [];
         this.filtered = [...this.names];
         this.loading = false;
       },
