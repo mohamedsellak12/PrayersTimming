@@ -52,15 +52,15 @@
     <div *ngIf="!loading && hadiths.length > 0" class="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4 w-full max-w-3xl">
       <button (click)="prevPage()" 
               [disabled]="currentPage === 1"
-              class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 w-full sm:w-auto transition">
+              class="px-4 py-2 bg-gray-200 dark:bg-gray-700 dark:text-green-100 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 w-full sm:w-auto transition">
         « السابق
       </button>
 
-      <span class="text-gray-600 dark:text-gray-300 text-center">📄 صفحة {{ currentPage }} من {{ lastPage }}</span>
+      <span class="text-gray-600 dark:text-gray-300 text-center"> صفحة {{ currentPage }} من {{ lastPage }}</span>
 
       <button (click)="nextPage()" 
               [disabled]="currentPage === lastPage"
-              class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 w-full sm:w-auto transition">
+              class="px-4 py-2 bg-gray-200 dark:bg-gray-700 dark:text-green-100 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 w-full sm:w-auto transition">
         التالي »
       </button>
     </div>
