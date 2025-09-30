@@ -29,14 +29,15 @@
     <!-- Bouton copier -->
     <button  (click)="copyZekr(z, i)" 
             class="absolute p-2 top-2 left-3 p-2 bg-green-600 text-white  dark:bg-gray-300 dark:text-green-600 rounded-md shadow hover:bg-green-700 transition flex items-center justify-center">
-      <i class="fas fa-copy"></i>
+      <i *ngIf="copiedIndex !== i" class="fas fa-copy"></i>
+      <i *ngIf="copiedIndex === i" class="fas fa-check-circle"></i>
     </button>
 
     <!-- Popup message -->
-    <div *ngIf="copiedIndex === i" 
+    <!-- <div *ngIf="copiedIndex === i" 
          class="absolute top-0 left-1/2 transform -translate-x-1/2 bg-green-600 text-white text-sm px-3 py-1 rounded shadow animate-fade">
       تم النسخ !
-    </div>
+    </div> -->
 
     <!-- Texte du Zekr -->
     <p class="text-center text-xl md:text-2xl m-4 font-extrabold text-gray-800 dark:text-gray-200 leading-relaxed">
