@@ -25,6 +25,7 @@ export class AppComponent implements OnInit  {
   isSurahRoute:boolean=false ;
   isSunaRoute:boolean=false ;
   isHadithRoute:boolean=false ;
+  isNamesRoute:boolean=false ;
   adhanMessage: string|null='';
   @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
@@ -44,6 +45,9 @@ export class AppComponent implements OnInit  {
     })
      this.router.events.subscribe(()=>{
       this.isHadithRoute=this.router.url.includes("/hadiths")
+    })
+     this.router.events.subscribe(()=>{
+      this.isNamesRoute=this.router.url.includes("/NamesOfGod")
     })
     try{
       const location=await this.prayTimmingService.getCurrentLocation();

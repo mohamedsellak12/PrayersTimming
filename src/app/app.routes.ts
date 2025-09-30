@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { SearchComponent } from './search/search.component';
 import { BooksComponent } from './books/books.component';
 import { HadithsComponent } from './hadiths/hadiths.component';
+import { AsmaComponent } from './asma/asma.component';
 
 export const routes: Routes = [
     {
@@ -28,5 +29,9 @@ export const routes: Routes = [
         path:"hadiths/:book/:chapter",
         component:HadithsComponent,
         title:"Hadiths"
+    },{
+        path:"NamesOfGod",
+        component:AsmaComponent,
+        title:"Names Of God"
     }
 ];

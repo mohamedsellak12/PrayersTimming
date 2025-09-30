@@ -25,6 +25,11 @@
           <i class="fas fa-book-open text-lg"></i> القرآن الكريم
         </a>
 
+         <a routerLink="/NamesOfGod" routerLinkActive="border-b-2 border-green-600" 
+           class="flex items-center gap-2 text-green-700 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-all font-semibold">
+          <i class="fas fa-praying-hands  text-lg"></i>  أسماء الله الحسنى
+        </a>
+
        
       </div>
 
@@ -69,6 +74,11 @@
     <a routerLink="/chapters" (click)="isOpen=!isOpen" routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg" 
        class="flex items-center gap-2 px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 transition">
       <i class="fas fa-book-open text-lg"></i> القرآن الكريم
+    </a>
+
+    <a routerLink="/NamesOfGod" (click)="isOpen=!isOpen" routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg" 
+       class="flex items-center gap-2 px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 transition">
+      <i class="fas fa-book-open text-lg"></i>  أسماء الله الحسنى
     </a>
   </div>
 </nav>

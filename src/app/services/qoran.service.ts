@@ -25,4 +25,6 @@ export class QoranService {
   search(query:string):Observable<any>{
     return this.http.get<any>(`${this.urlapi}/search?q=${query}`);
   }
+
+ 
 }

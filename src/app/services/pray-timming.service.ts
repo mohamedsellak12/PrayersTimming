@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +65,9 @@ export class PrayTimmingService {
     }
 
 
+  }
 
-
+   getAllGodNames():Observable<any>{
+    return this.http.get(`http://api.aladhan.com/v1/asmaAlHusna`)
   }
 }

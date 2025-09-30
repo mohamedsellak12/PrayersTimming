@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HadithService } from '../services/hadith.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -21,8 +21,13 @@ export class HadithsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private hadithService: HadithService
-  ) {}
+    private hadithService: HadithService,
+    private router:Router
+  ) {
+     this.router.events.subscribe(()=>{
+      window.scrollTo({top:0 , behavior:'smooth'})
+    })
+  }
 
   ngOnInit(): void {
     // ✅ جلب الـ params من الـ route
