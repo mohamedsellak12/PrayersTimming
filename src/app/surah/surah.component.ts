@@ -110,9 +110,7 @@ playAudio(id:any){
   
 
 }
-navigateAndReload(nextId: number) {
-   
-    
+navigateAndReload(nextId: number) { 
     setTimeout(() => {
       window.location.href = `/surah/${nextId}`; // Rechargement complet
     }, 500); // Délai pour permettre le scroll

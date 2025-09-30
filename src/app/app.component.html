@@ -1,4 +1,4 @@
-<div *ngIf="!isQoranRoute && !isSurahRoute" 
+<div *ngIf="!isQoranRoute && !isSurahRoute && !isSunaRoute && !isHadithRoute" 
      class="min-h-screen flex flex-col items-center justify-start 
             bg-gradient-to-b from-green-100 via-white to-green-50 
             px-4 sm:px-6 lg:px-12 py-8 text-center">
@@ -66,18 +66,26 @@
     </ul>
   </div>
 
-  <!-- Quran link -->
-  <div class="mt-12">
-    <a routerLink="/chapters" 
-       class="px-8 py-3 bg-green-700 text-white rounded-lg 
-              shadow-md hover:bg-green-800 hover:shadow-xl 
-              transition-all duration-300 ease-in-out text-lg font-semibold">
-              <i class="fas fa-book-open text-2xl text-green-600"></i>
+  <div class="mt-12 flex justify-center gap-6 flex-wrap">
+  <!-- Lien vers le Coran -->
+  <a routerLink="/chapters" 
+     class="px-8 py-3 bg-green-700 text-white rounded-lg 
+            shadow-md hover:bg-green-800 hover:shadow-xl 
+            transition-all duration-300 ease-in-out text-lg font-semibold flex items-center gap-2">
+    <i class="fas fa-book-open text-2xl"></i>
+    القرآن الكريم
+  </a>
 
-      القرآن الكريم
+  <!-- Lien vers les livres de hadith -->
+  <a routerLink="/Sunah-books" 
+     class="px-8 py-3 bg-blue-700 text-white rounded-lg 
+            shadow-md hover:bg-blue-800 hover:shadow-xl 
+            transition-all duration-300 ease-in-out text-lg font-semibold flex items-center gap-2">
+    <i class="fas fa-book text-2xl"></i>
+    كتب الحديث
+  </a>
+</div>
 
-    </a>
-  </div>
 </div>
 
 <!-- Audio -->

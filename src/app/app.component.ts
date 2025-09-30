@@ -22,6 +22,8 @@ export class AppComponent implements OnInit  {
   countdown:string|null=''
   isQoranRoute: boolean=false;
   isSurahRoute:boolean=false ;
+  isSunaRoute:boolean=false ;
+  isHadithRoute:boolean=false ;
   adhanMessage: string|null='';
   @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
@@ -35,6 +37,12 @@ export class AppComponent implements OnInit  {
     })
     this.router.events.subscribe(()=>{
       this.isSurahRoute=this.router.url.includes("/surah")
+    })
+     this.router.events.subscribe(()=>{
+      this.isSunaRoute=this.router.url.includes("/Sunah-books")
+    })
+     this.router.events.subscribe(()=>{
+      this.isHadithRoute=this.router.url.includes("/hadiths")
     })
     try{
       const location=await this.prayTimmingService.getCurrentLocation();
