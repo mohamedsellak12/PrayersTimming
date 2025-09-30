@@ -13,6 +13,7 @@ export class AzkarComponent {
  type: string | null = null;
  azkars:any[]=[]
   counters: number[] = [];
+  copiedIndex: number | null = null;
  title:string=""
  loading:boolean=true
 
@@ -92,8 +93,19 @@ export class AzkarComponent {
     })
   }
 
+  
+  
 
 
+copyZekr(z: any, index: number) {
+  navigator.clipboard.writeText(z.zekr).then(() => {
+    this.copiedIndex = index;
+
+    setTimeout(() => {
+      this.copiedIndex = null;
+    }, 1500); 
+  });
+}
 
 
 
