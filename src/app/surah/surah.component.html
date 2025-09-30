@@ -1,48 +1,45 @@
-<div class="min-h-screen p-4 md:p-8 bg-gradient-to-b from-green-50 to-white">
+<div class="min-h-screen p-4 md:p-8 bg-gradient-to-b from-green-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors">
 
   <!-- Info sur la sourate -->
-  <div class="bg-white p-4 md:p-6 rounded-xl shadow-md mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-    <div class="text-gray-800 text-sm md:text-base">
-      <a routerLink="/chapters" class="text-green-600 hover:underline font-semibold">فهرس القرآن</a> | 
+  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-xl shadow-md mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-gray-800 dark:text-gray-200">
+    <div class="text-sm md:text-base">
+      <a routerLink="/chapters" class="text-green-600 dark:text-green-400 hover:underline font-semibold">فهرس القرآن</a> | 
       سورة <span class="font-bold">{{ surahInfo?.name_arabic }}</span> | 
       {{ surahInfo?.revelation_place === 'makkah' ? 'مكية' : 'مدنية' }} | 
       رقم السورة: {{ surahInfo?.id }} - عدد آياتها: {{ surahInfo?.verses_count }} - الاسم الإنجليزي: {{ surahInfo?.translated_name?.name }}
     </div>
     <div>
-      <a (click)="scrollToSection('reciter')" class="text-green-600 hover:underline font-semibold cursor-pointer">الإستماع</a>
+      <a (click)="scrollToSection('reciter')" class="text-green-600 dark:text-green-400 hover:underline font-semibold cursor-pointer">الإستماع</a>
     </div>
   </div>
 
   <!-- Contenu de la sourate -->
-  <div class="text-[1.3rem] text-gray-700 text-center leading-loose border border-gray-300 p-5 rounded-xl shadow-md">
-    <h1 class="text-xl md:text-2xl font-bold text-green-700 mb-4 text-center" *ngIf="surahInfo?.name_arabic !== 'التوبة'">
+  <div class="text-[1.3rem] text-gray-700 dark:text-gray-200 text-center leading-loose border border-gray-300 dark:border-gray-600 p-5 rounded-xl shadow-md">
+    <h1 class="text-xl md:text-2xl font-bold text-green-700 dark:text-green-400 mb-4 text-center" *ngIf="surahInfo?.name_arabic !== 'التوبة'">
       <span *ngIf="surahInfo?.name_arabic !== 'الفاتحة'">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</span>
     </h1>
     <div class="max-w-5xl mx-auto">
-  <h2>
-    {{ complateSurah }}
-  </h2>
-</div>
-
+      <h2>
+        {{ complateSurah }}
+      </h2>
+    </div>
   </div>
 
   <!-- Navigation entre les sourates -->
-  <div class="flex p-2 flex-row justify-between items-center mb-6 gap-4">
-   
-<button 
-  *ngIf="showScrollTop"
-  (click)="scrollToTop()" 
-  class="fixed bottom-5 right-5 px-4 py-3 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 transition text-lg z-50"
->
-  <i class="fas fa-arrow-up"></i>
-</button>
+  <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 mt-4">
+    <button 
+      *ngIf="showScrollTop"
+      (click)="scrollToTop()" 
+      class="fixed bottom-5 right-5 px-4 py-3 bg-green-600 dark:bg-green-500 text-white rounded-full shadow-lg hover:bg-green-700 dark:hover:bg-green-600 transition text-lg z-50"
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
-
-    <a *ngIf="id < 114" (click)="navigateAndReload(id+1)" class="px-4 cursor-pointer py-2 bg-gray-100 text-gray-800 rounded-lg shadow hover:bg-gray-200 transition w-1/2 md:w-auto text-center">
+    <a *ngIf="id < 114" (click)="navigateAndReload(id+1)" class="px-4 cursor-pointer py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-600 transition w-full md:w-auto text-center">
       <p>التالية</p>
       <strong>سورة {{ nextChapiter }}</strong>
     </a>
-     <a *ngIf="id > 1" (click)="navigateAndReload(id-1)" class="px-4 cursor-pointer py-2 bg-gray-100 text-gray-800 rounded-lg shadow hover:bg-gray-200 transition w-1/2 md:w-auto text-center">
+    <a *ngIf="id > 1" (click)="navigateAndReload(id-1)" class="px-4 cursor-pointer py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg shadow hover:bg-gray-200 dark:hover:bg-gray-600 transition w-full md:w-auto text-center">
       <p>السابقة</p>
       <strong>سورة {{ prevChapiter }}</strong>
     </a>
@@ -50,17 +47,17 @@
 
   <!-- Reciters -->
   <div id="reciter" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
-    <div *ngFor="let r of reciters" class="bg-white p-4 rounded-xl shadow-md flex flex-col items-center text-center gap-3">
+    <div *ngFor="let r of reciters" class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md flex flex-col items-center text-center gap-3">
       <img [src]="'/reciters/' + r.id + '.png'" class="w-20 h-20 object-cover rounded-full shadow-md" alt="{{ r.name }}">
-      <p class="font-semibold text-gray-800">{{ r.name }}</p>
-      <button (click)="playAudio(r.id)" class="px-4 py-2 bg-green-600 text-white rounded-full shadow hover:bg-green-700 transition">
+      <p class="font-semibold text-gray-800 dark:text-gray-200">{{ r.name }}</p>
+      <button (click)="playAudio(r.id)" class="px-4 py-2 bg-green-600 dark:bg-green-500 text-white rounded-full shadow hover:bg-green-700 dark:hover:bg-green-600 transition">
         إستمع الآن لسورة {{ surahInfo?.name_arabic }}
       </button>
     </div>
   </div>
 
   <!-- Audio player -->
-  <div id="audio" *ngIf="audioUrl" class="bg-white p-4 rounded-xl shadow-md mb-6">
-    <audio [src]="audioUrl" controls autoplay class="w-full"></audio>
+  <div id="audio" *ngIf="audioUrl" class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md mb-6">
+    <audio [src]="audioUrl" controls autoplay class="w-full "></audio>
   </div>
 </div>
