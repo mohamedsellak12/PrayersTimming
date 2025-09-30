@@ -1,0 +1,54 @@
+<div class="min-h-screen p-4 sm:p-6 mx-auto 
+            bg-gradient-to-b from-green-100 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300 flex flex-col items-center">
+
+  <!-- Titre centré avec fond adapté -->
+  <h1 
+    class="text-center text-2xl sm:text-3xl md:text-4xl font-bold 
+           text-green-700 dark:text-green-300 
+           bg-green-100 dark:bg-gray-700 
+           px-6 py-3 rounded-xl shadow mb-6 max-w-full sm:max-w-lg">
+    {{ title }}
+  </h1>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center text-gray-500">
+    جاري التحميل...
+  </div>
+
+  <!-- Pas d'azkar -->
+  <div *ngIf="!loading && azkars.length === 0" class="text-center text-gray-500">
+    لا توجد أذكار.
+  </div>
+
+  <!-- Liste des azkars centrée -->
+ <ul *ngIf="!loading && azkars.length > 0" class="space-y-4 w-full  max-w-md md:max-w-3xl">
+  <li *ngFor="let z of azkars; let i = index" 
+      class="p-6 rounded-lg bg-white dark:bg-gray-800 shadow mx-auto flex flex-col items-center space-y-3">
+    
+    <!-- Texte du Zekr centré -->
+    <p class="text-center font-extrabold text-gray-800 dark:text-gray-200 leading-relaxed">
+      {{ z.zekr }}
+    </p>
+
+   <!-- Bouton compteur centré -->
+<button (click)="decrement(i)"
+        [disabled]="counters[i] === 0"
+        class="inline-flex items-center justify-center w-12 h-12 rounded-full 
+               font-semibold border transition 
+               bg-green-100 text-green-700 border-green-300
+               dark:bg-green-900 dark:text-green-200 dark:border-green-700
+               hover:bg-green-200 dark:hover:bg-green-800
+               disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 
+               dark:disabled:bg-gray-700 dark:disabled:text-gray-500 dark:disabled:border-gray-600">
+  {{ counters[i] }}
+</button>
+
+
+    <!-- Bénédiction -->
+    <p *ngIf="z.bless" class="text-sm text-green-700 dark:text-green-400 text-center">
+      {{ z.bless }}
+    </p>
+  </li>
+</ul>
+
+</div>

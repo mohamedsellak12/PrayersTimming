@@ -3,35 +3,79 @@
     <div class="flex justify-between items-center h-20">
 
       <!-- Links Desktop -->
-      <div class="hidden md:flex items-center  space-x-6">
-         <!-- Dark Mode Toggle Desktop -->
-       <button (click)="toggleDarkMode()"
-        class="ml-4 p-2 max-w-3xl rounded bg-gray-100  dark:bg-green-600 hover:bg-gray-300 dark:hover:bg-green-500 transition">
- <i class="fas" [ngClass]="darkMode ? 'fa-sun ' : 'fa-moon'"></i>
-</button>
+<div class="hidden md:flex items-center space-x-6">
 
+  <!-- Dark Mode Toggle Desktop -->
+  <button (click)="toggleDarkMode()"
+          class="ml-4 p-2 max-w-3xl rounded bg-gray-100 dark:bg-green-600 hover:bg-gray-300 dark:hover:bg-green-500 transition">
+    <i class="fas" [ngClass]="darkMode ? 'fa-sun' : 'fa-moon'"></i>
+  </button>
 
-        <a routerLink="/" routerLinkActive="border-b-2 border-green-600" 
-           [routerLinkActiveOptions]="{ exact: true }"
-           class="flex items-center gap-2 text-green-700 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-all font-semibold">
-          <i class="fas fa-clock text-lg"></i> مواقيت الصلاة
-        </a>
-        <a routerLink="/Sunah-books" routerLinkActive="border-b-2 border-green-600" 
-           class="flex items-center gap-2 text-green-700 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-all font-semibold">
-          <i class="fas fa-book text-lg"></i> كتب الحديث
-        </a>
-        <a routerLink="/chapters" routerLinkActive="border-b-2 border-green-600" 
-           class="flex items-center gap-2 text-green-700 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-all font-semibold">
-          <i class="fas fa-book-open text-lg"></i> القرآن الكريم
-        </a>
+  <a routerLink="/" routerLinkActive="border-b-2 border-green-600" 
+     [routerLinkActiveOptions]="{ exact: true }"
+     class="flex items-center gap-2 text-green-700 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-all font-semibold">
+     مواقيت الصلاة
+  </a>
 
-         <a routerLink="/NamesOfGod" routerLinkActive="border-b-2 border-green-600" 
-           class="flex items-center gap-2 text-green-700 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-all font-semibold">
-          <i class="fas fa-praying-hands  text-lg"></i>  أسماء الله الحسنى
-        </a>
+  <a routerLink="/Sunah-books" routerLinkActive="border-b-2 border-green-600" 
+     class="flex items-center gap-2 text-green-700 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-all font-semibold">
+    كتب الحديث
+  </a>
 
-       
-      </div>
+  <a routerLink="/chapters" routerLinkActive="border-b-2 border-green-600" 
+     class="flex items-center gap-2 text-green-700 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-all font-semibold">
+     القرآن الكريم
+  </a>
+
+  <a routerLink="/NamesOfGod" routerLinkActive="border-b-2 border-green-600" 
+     class="flex items-center gap-2 text-green-700 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-all font-semibold">
+    أسماء الله الحسنى
+  </a>
+
+  <!-- Nouveau item avec dropdown -->
+  <div class="relative dropdown-wrapper"  >
+    <button (click)="dropdownOpen = !dropdownOpen"
+            class="flex items-center gap-2 text-green-700 dark:text-green-400 hover:text-green-500 dark:hover:text-green-300 transition-all font-semibold">
+        
+أذكار
+      <i class="fas fa-chevron-down text-sm ml-1" [ngClass]="dropdownOpen ? 'rotate-180' : ''"></i>
+    </button>
+
+    <!-- Dropdown menu -->
+    <div *ngIf="dropdownOpen" 
+   
+         class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg z-50"
+          [ngClass]="{'scale-100 opacity-100': dropdownOpen}"
+         >
+         <div (click)="dropdownOpen=!dropdownOpen">
+
+           <a routerLink="/azkar/sabah"
+   routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg"
+   [routerLinkActiveOptions]="{ exact: true }"
+   class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+  أذكار الصباح
+</a>
+
+<a routerLink="/azkar/massa"
+   routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg"
+   [routerLinkActiveOptions]="{ exact: true }"
+   class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+  أذكار المساء
+</a>
+
+<a routerLink="/azkar/salat"
+   routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg"
+   [routerLinkActiveOptions]="{ exact: true }"
+   class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+  أذكار بعد الصلاة
+</a>
+
+         </div>
+    </div>
+  </div>
+
+</div>
+
 
       <!-- Hamburger Mobile -->
       <div class="md:hidden flex items-center gap-3">
@@ -58,27 +102,67 @@
     </div>
   </div>
 
-  <!-- Mobile Menu -->
-  <div *ngIf="isOpen" class="md:hidden bg-green-50/90 dark:bg-gray-900/80 backdrop-blur-md shadow-lg py-4 px-2 space-y-2 transition-colors duration-300">
-    <a routerLink="/Sunah-books" (click)="isOpen=!isOpen" routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg" 
-       class="flex items-center gap-2 px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 transition">
-      <i class="fas fa-book text-lg"></i> كتب الحديث
-    </a>
+ 
+  <!-- Menu mobile -->
+<div *ngIf="isOpen" class="md:hidden  bg-green-50/90 dark:bg-gray-900/80 backdrop-blur-md shadow-lg py-4 px-2 space-y-2 transition-colors duration-300">
 
-    <a routerLink="/" (click)="isOpen=!isOpen" routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg" 
-       [routerLinkActiveOptions]="{exact:true}"
-       class="flex items-center gap-2 px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 transition">
-      <i class="fas fa-clock text-lg"></i> مواقيت الصلاة
-    </a>
+  <a routerLink="/Sunah-books" (click)="isOpen=!isOpen" 
+     routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg" 
+     class="flex items-center gap-2 px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 transition">
+    <i class="fas fa-book text-lg"></i> كتب الحديث
+  </a>
 
-    <a routerLink="/chapters" (click)="isOpen=!isOpen" routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg" 
-       class="flex items-center gap-2 px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 transition">
-      <i class="fas fa-book-open text-lg"></i> القرآن الكريم
-    </a>
+  <a routerLink="/" (click)="isOpen=!isOpen" 
+     routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg" 
+     [routerLinkActiveOptions]="{exact:true}"
+     class="flex items-center gap-2 px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 transition">
+    <i class="fas fa-clock text-lg"></i> مواقيت الصلاة
+  </a>
 
-    <a routerLink="/NamesOfGod" (click)="isOpen=!isOpen" routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg" 
-       class="flex items-center gap-2 px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 transition">
-      <i class="fas fa-book-open text-lg"></i>  أسماء الله الحسنى
-    </a>
+  <a routerLink="/chapters" (click)="isOpen=!isOpen" 
+     routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg" 
+     class="flex items-center gap-2 px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 transition">
+    <i class="fas fa-book-open text-lg"></i> القرآن الكريم
+  </a>
+
+  <a routerLink="/NamesOfGod" (click)="isOpen=!isOpen" 
+     routerLinkActive="bg-green-100 dark:bg-gray-700 rounded-lg" 
+     class="flex items-center gap-2 px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 transition">
+    <i class="fas fa-praying-hands text-lg"></i> أسماء الله الحسنى
+  </a>
+
+  <!-- Dropdown أذكار -->
+  <div class="relative">
+    <button (click)="dropdownMobile = !dropdownMobile" 
+            class="flex justify-between items-center w-full px-4 py-2 text-green-700 dark:text-green-200 font-semibold hover:bg-green-200 dark:hover:bg-gray-700 rounded-lg transition">
+      <span>أذكار</span>
+      <i class="fas fa-chevron-down" [ngClass]="dropdownMobile ? 'rotate-180' : ''"></i>
+    </button>
+
+    <div *ngIf="dropdownMobile" class="pl-6 mt-2 space-y-1">
+       <a routerLink="/azkar/sabah" 
+     (click)="isOpen=!isOpen"
+     routerLinkActive="bg-green-200 dark:bg-gray-700 rounded-lg"
+     class="block px-4 py-2 text-green-700 dark:text-green-200 hover:bg-green-200 dark:hover:bg-gray-700 rounded-lg transition">
+    أذكار الصباح
+  </a>
+
+  <a routerLink="/azkar/massa" 
+     (click)="isOpen=!isOpen"
+     routerLinkActive="bg-green-200 dark:bg-gray-700 rounded-lg"
+     class="block px-4 py-2 text-green-700 dark:text-green-200 hover:bg-green-200 dark:hover:bg-gray-700 rounded-lg transition">
+    أذكار المساء
+  </a>
+
+  <a routerLink="/azkar/salat" 
+     (click)="isOpen=!isOpen"
+     routerLinkActive="bg-green-200 dark:bg-gray-700 rounded-lg"
+     class="block px-4 py-2 text-green-700 dark:text-green-200 hover:bg-green-200 dark:hover:bg-gray-700 rounded-lg transition">
+    أذكار بعد الصلاة
+  </a>
+    </div>
   </div>
+
+</div>
+
 </nav>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -13,6 +13,9 @@ export class NavbarComponent implements OnInit {
  
  isOpen: boolean = false;
  darkMode = false;
+ dropdownOpen :boolean= false;
+ dropdownMobile:boolean=false
+
 
 toggleDarkMode() {
   this.darkMode = !this.darkMode;
@@ -24,6 +27,14 @@ toggleDarkMode() {
     localStorage.setItem("dark",'false')
     html.classList.remove('dark');
 
+  }
+}
+
+@HostListener('document:click', ['$event'])
+onDocumentClick(event: Event) {
+  const target = event.target as HTMLElement;
+  if (!target.closest('.dropdown-wrapper')) {
+    this.dropdownOpen = false;
   }
 }
 

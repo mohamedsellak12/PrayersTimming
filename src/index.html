@@ -14,7 +14,11 @@
       // Config Tailwind pour dark mode
       tailwind.config = {
         darkMode: 'class',
-        theme: { extend: {} },
+        theme: { extend: {
+           screens: {
+        'mobile900': {'max': '900px'}, // visible jusqu'à 900px
+      },
+        } },
         
       }
     </script>

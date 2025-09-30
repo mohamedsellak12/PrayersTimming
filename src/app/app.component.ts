@@ -26,6 +26,7 @@ export class AppComponent implements OnInit  {
   isSunaRoute:boolean=false ;
   isHadithRoute:boolean=false ;
   isNamesRoute:boolean=false ;
+  isAzkasRoute:boolean=false ;
   adhanMessage: string|null='';
   @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
@@ -48,6 +49,9 @@ export class AppComponent implements OnInit  {
     })
      this.router.events.subscribe(()=>{
       this.isNamesRoute=this.router.url.includes("/NamesOfGod")
+    })
+     this.router.events.subscribe(()=>{
+      this.isAzkasRoute=this.router.url.includes("/azkar")
     })
     try{
       const location=await this.prayTimmingService.getCurrentLocation();
@@ -82,7 +86,7 @@ export class AppComponent implements OnInit  {
         const now = new Date();
         if (this.nextPrayer) {
             const diff = this.nextPrayer.time.getTime() - now.getTime();
-            console.log(diff)
+            // console.log(diff)
             if (diff <= 1000 && diff > 0) {
                 this.countdown = null;
                 this.adhanMessage="Time for :" + this.nextPrayer.name + "!"
