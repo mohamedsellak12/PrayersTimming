@@ -1,71 +1,68 @@
-<div class="p-4 sm:p-6 mx-auto min-h-screen bg-gradient-to-b from-green-100 via-white to-green-50">
+<div class="p-4 sm:p-6 mx-auto min-h-screen bg-gradient-to-b from-green-100 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
 
- <button 
-  *ngIf="showScrollTop && !loading"
-  (click)="scrollToTop()" 
-  class="fixed bottom-5 right-5 px-4 py-3 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 transition text-lg z-50"
->
+  <!-- Bouton Scroll Top -->
+  <button 
+    *ngIf="showScrollTop && !loading"
+    (click)="scrollToTop()" 
+    class="fixed bottom-5 right-5 px-4 py-3 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 transition text-lg z-50 dark:bg-green-500 dark:hover:bg-green-600"
+  >
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
+  <!-- Bouton Scroll Bottom -->
+  <button 
+    *ngIf="showScrollBottom && !loading"
+    (click)="scrollToBottom()" 
+    class="fixed bottom-5 left-5 px-4 py-3 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 transition text-lg z-50 dark:bg-green-500 dark:hover:bg-green-600"
+  >
+    <i class="fas fa-arrow-down"></i>
+  </button>
 
-  <i class="fas fa-arrow-up"></i>
-</button>
- 
-<button 
-  *ngIf="showScrollBottom &&!loading"
-  (click)="scrollToBottom()" 
-  class="fixed bottom-15 left-5 px-4 py-3 bg-green-600 text-white rounded-full shadow-lg hover:bg-green-700 transition text-lg z-50"
->
-  <i class="fas fa-arrow-down"></i>
-</button>
-  
-  <!-- التحميل -->
-   <div *ngIf="loading" class="flex flex-col items-center justify-center mt-10">
-        <div class="w-12 h-12 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
-        <p class="mt-4 text-gray-600 text-lg font-medium">جاري تحميل البيانات...</p>
-    </div>
-     <!-- العنوان -->
-  <h2 *ngIf="!loading" class="text-xl sm:text-4xl font-bold mb-8 text-center text-green-700">
-      الأحاديث من كتاب {{ translateBookName(bookSlug) || "" }} - الفصل رقم {{ chapterId }}
+  <!-- Loading -->
+  <div *ngIf="loading" class="flex flex-col items-center justify-center mt-10">
+    <div class="w-12 h-12 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
+    <p class="mt-4 text-gray-600 dark:text-gray-300 text-lg font-medium">جاري تحميل البيانات...</p>
+  </div>
+
+  <!-- Title -->
+  <h2 *ngIf="!loading" class="text-xl sm:text-4xl font-bold mb-8 text-center text-green-700 dark:text-green-400">
+    الأحاديث من كتاب {{ translateBookName(bookSlug) || "" }} - الفصل رقم {{ chapterId }}
   </h2>
 
-  <!-- قائمة الأحاديث -->
- <div *ngIf="!loading && hadiths.length > 0" 
-     class="flex flex-col items-center gap-6">
+  <!-- Hadiths List -->
+  <div *ngIf="!loading && hadiths.length > 0" class="flex flex-col items-center gap-6">
+    <div *ngFor="let h of hadiths" 
+         class="w-full max-w-3xl p-4 sm:p-5 bg-white dark:bg-gray-800 rounded-xl text-center shadow hover:shadow-md transition border border-gray-200 dark:border-gray-600">
 
-  <div *ngFor="let h of hadiths" 
-       class="w-full max-w-3xl p-4 sm:p-5 bg-white rounded-xl text-center shadow hover:shadow-md transition border border-gray-200">
+      <p class="text-xs sm:text-sm text-gray-400 dark:text-green-300">الحديث رقم {{ h.hadithNumber }}</p>
 
-    <p class="text-xs sm:text-sm text-gray-400">الحديث رقم {{ h.hadithNumber }}</p>
+      <!-- Arabic text -->
+      <p class="mt-3 text-right font-arabic text-base sm:text-lg text-green-800 dark:text-gray-200 leading-loose">
+        {{ h.hadithArabic }}
+      </p>
 
-    <!-- نص الحديث بالعربية -->
-    <p class="mt-3 text-right font-arabic text-base sm:text-lg text-green-800 leading-loose">
-      {{ h.hadithArabic }}
-    </p>
+      <!-- Extra info -->
+      <div class="mt-4 flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs sm:text-sm text-gray-500 dark:text-gray-300 gap-2">
+        <span> الحكم: <strong class="text-green-600 dark:text-green-400">{{ translateStatus(h.status) }}</strong></span>
+        <span> المجلد: {{ h.volume }}</span>
+      </div>
+    </div>
 
-    <!-- معلومات إضافية -->
-    <div class="mt-4 flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs sm:text-sm text-gray-500 gap-2">
-      <span>📌 الحكم: <strong class="text-green-600">{{ translateStatus(h.status) }}</strong></span>
-      <span>📖 المجلد: {{ h.volume }}</span>
+    <!-- Pagination -->
+    <div *ngIf="!loading && hadiths.length > 0" class="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4 w-full max-w-3xl">
+      <button (click)="prevPage()" 
+              [disabled]="currentPage === 1"
+              class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 w-full sm:w-auto transition">
+        « السابق
+      </button>
+
+      <span class="text-gray-600 dark:text-gray-300 text-center">📄 صفحة {{ currentPage }} من {{ lastPage }}</span>
+
+      <button (click)="nextPage()" 
+              [disabled]="currentPage === lastPage"
+              class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 w-full sm:w-auto transition">
+        التالي »
+      </button>
     </div>
   </div>
-  <!-- التصفح بين الصفحات -->
-  <div *ngIf="!loading && hadiths.length > 0" 
-       class="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4">
-    <button (click)="prevPage()" 
-            [disabled]="currentPage === 1"
-            class="px-4 left-10 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50 w-full sm:w-auto">
-      « السابق
-    </button>
-  
-    <span class="text-gray-600 text-center">📄 صفحة {{ currentPage }} من {{ lastPage }}</span>
-  
-    <button (click)="nextPage()" 
-            [disabled]="currentPage === lastPage"
-            class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50 w-full sm:w-auto">
-      التالي »
-    </button>
-  </div>
-</div>
-
-
 </div>

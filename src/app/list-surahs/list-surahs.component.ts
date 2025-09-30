@@ -13,6 +13,7 @@ export class ListSurahsComponent implements OnInit {
   surahs: any[] = [];
   groupedSurahs: any[][] = [];
   cols: number = 3; // nombre de colonnes par défaut (desktop)
+  loading:boolean=true
 
   constructor(private qoranService: QoranService) {}
 
@@ -23,6 +24,7 @@ export class ListSurahsComponent implements OnInit {
       next: (data) => {
         this.surahs = data.chapters;
         this.groupSurahs();
+        this.loading=false
       },
       error: (err) => console.error(err)
     });

@@ -2,22 +2,24 @@
 
 <div *ngIf="!isQoranRoute && !isSurahRoute && !isSunaRoute && !isHadithRoute" 
      class="min-h-screen flex flex-col items-center justify-start 
-            bg-gradient-to-b from-green-100 via-white to-green-50 
-            px-4 sm:px-6 lg:px-12 py-8 text-center">
-            <!-- Loading state -->
-<div *ngIf="loading" class="flex flex-col items-center justify-center mt-10">
-  <div class="w-12 h-12 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
-  <p class="mt-4 text-gray-600 text-lg font-medium">جاري تحميل البيانات...</p>
-</div>
+            bg-gradient-to-b from-green-100 via-white to-green-50
+            dark:from-gray-800 dark:via-gray-900 dark:to-gray-800
+            px-4 sm:px-6 lg:px-12 py-8 text-center transition-colors duration-300">
 
+  <!-- Loading state -->
+  <div *ngIf="loading" class="flex flex-col items-center justify-center mt-10">
+    <div class="w-12 h-12 border-4 border-green-600 border-t-transparent rounded-full animate-spin
+                dark:border-green-400 dark:border-t-transparent"></div>
+    <p class="mt-4 text-gray-600 dark:text-gray-300 text-lg font-medium">جاري تحميل البيانات...</p>
+  </div>
 
   <!-- Ayah -->
-  <h1 *ngIf="!loading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-800 mb-6 leading-relaxed">
+  <h1 *ngIf="!loading" class="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-800 dark:text-green-400 mb-6 leading-relaxed">
      إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا 
   </h1>
 
   <!-- Date Hijri -->
-  <h2 *ngIf="!loading" class="text-base sm:text-lg lg:text-xl text-gray-700 ">
+  <h2 *ngIf="!loading" class="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300">
     {{ prayerTimes.date.hijri.weekday.ar }} 
     {{ prayerTimes.date.hijri.day }} 
     {{ prayerTimes.date.hijri.month.ar }} 
@@ -25,18 +27,18 @@
   </h2>
 
   <!-- Loading -->
-  <p *ngIf="!loading && !prayerTimes" class="text-gray-500 italic mb-4">
+  <p *ngIf="!loading && !prayerTimes" class="text-gray-500 dark:text-gray-400 italic mb-4">
     Détection de votre localisation...
   </p>
 
   <!-- Next prayer -->
-  <h3 class="text-xl font-semibold text-green-700 mt-4">
-    {{ nextPrayer?.name==="Fajr" ? "الفجر":nextPrayer?.name==="Sunrise"?"الشروق":nextPrayer?.name==="Dhuhr"?"الظهر":nextPrayer?.name==="Asr"?"العصر":nextPrayer?.name==="Maghrib"?"المغرب":nextPrayer?.name==="Dhuhr"?"الظهر":nextPrayer?.name==="Asr"?"العصر":nextPrayer?.name==="Maghrib"?"العشاء":"" }}
+  <h3 class="text-xl font-semibold text-green-700 dark:text-green-400 mt-4">
+    {{ nextPrayer?.name==="Fajr" ? "الفجر":nextPrayer?.name==="Sunrise"?"الشروق":nextPrayer?.name==="Dhuhr"?"الظهر":nextPrayer?.name==="Asr"?"العصر":nextPrayer?.name==="Maghrib"?"المغرب":nextPrayer?.name==="Isha"?"العشاء":"" }}
   </h3>
-  <h3 *ngIf="countdown" class="text-2xl sm:text-3xl font-mono text-gray-800 mt-3 tracking-wide">
+  <h3 *ngIf="countdown" class="text-2xl sm:text-3xl font-mono text-gray-800 dark:text-gray-200 mt-3 tracking-wide">
     {{ countdown }}
   </h3>
-  <h3 *ngIf="!countdown && adhanMessage" class="text-xl sm:text-2xl text-red-600 font-bold mt-3 animate-pulse">
+  <h3 *ngIf="!countdown && adhanMessage" class="text-xl sm:text-2xl text-red-600 dark:text-red-400 font-bold mt-3 animate-pulse">
     {{ adhanMessage }}
   </h3>
 
@@ -44,15 +46,15 @@
   <button 
     *ngIf="adhanMessage" 
     (click)="stopAlAdhan()" 
-    class="mt-5 px-8 py-3 bg-red-600 text-white rounded-full 
-           shadow-lg hover:bg-red-700 hover:shadow-xl 
+    class="mt-5 px-8 py-3 bg-red-600 dark:bg-red-500 text-white rounded-full 
+           shadow-lg hover:bg-red-700 dark:hover:bg-red-600 hover:shadow-xl 
            transition-all duration-300 ease-in-out">
     إيقاف
   </button>
 
   <!-- City / Country -->
-  <h2 *ngIf="city" class="mt-8 flex items-center justify-center gap-2 text-gray-700 text-lg sm:text-xl font-medium">
-    <i class="fas fa-map-marker-alt text-green-600 text-xl"></i> 
+  <h2 *ngIf="city" class="mt-8 flex items-center justify-center gap-2 text-gray-700 dark:text-gray-300 text-lg sm:text-xl font-medium">
+    <i class="fas fa-map-marker-alt text-green-600 dark:text-green-400 text-xl"></i> 
     {{ city }} , {{ country }}
   </h2>
 
@@ -68,9 +70,8 @@
     </ul>
   </div>
 
-
-
 </div>
+
 
 <!-- Audio -->
 <audio #audioPlayer src="a1.mp3"></audio>
