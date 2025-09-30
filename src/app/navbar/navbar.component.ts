@@ -6,7 +6,8 @@ import { RouterModule } from '@angular/router';
   selector: 'app-navbar',
   imports: [CommonModule,RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
+  
 })
 export class NavbarComponent {
  isOpen: boolean = false;

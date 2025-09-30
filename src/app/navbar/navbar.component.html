@@ -50,24 +50,31 @@
   </div>
 
   <!-- القائمة Mobile -->
-  <div *ngIf="isOpen" class="md:hidden bg-green-50/90 backdrop-blur-md shadow-lg py-4 px-2 space-y-2">
-    <a routerLink="/Sunah-books" routerLinkActive="bg-green-100 rounded-lg" 
-       class="flex items-center gap-2 px-4 py-2 text-green-700 font-semibold hover:bg-green-200 transition">
-      <i class="fas fa-book text-lg"></i>
-      كتب الحديث
-    </a>
+ <div 
+  *ngIf="isOpen" 
+  class="md:hidden bg-green-50/90 backdrop-blur-md shadow-lg py-4 px-2 space-y-2
+         origin-top transform transition-all duration-300 ease-out scale-y-100">
+  
+  <a routerLink="/Sunah-books" (click)="isOpen=!isOpen" routerLinkActive="bg-green-100 rounded-lg" 
+     class="flex items-center gap-2 px-4 py-2 text-green-700 font-semibold hover:bg-green-200 transition">
+    <i class="fas fa-book text-lg"></i>
+    كتب الحديث
+  </a>
 
-    <a routerLink="/" routerLinkActive="bg-green-100 rounded-lg" 
-       [routerLinkActiveOptions]="{exact:true}"
-       class="flex items-center gap-2 px-4 py-2 text-green-700 font-semibold hover:bg-green-200 transition">
-      <i class="fas fa-clock text-lg"></i>
-      مواقيت الصلاة
-    </a>
+  <a routerLink="/" routerLinkActive="bg-green-100 rounded-lg" 
+     [routerLinkActiveOptions]="{exact:true}"
+     (click)="isOpen=!isOpen"
+     class="flex items-center gap-2 px-4 py-2 text-green-700 font-semibold hover:bg-green-200 transition">
+    <i class="fas fa-clock text-lg"></i>
+    مواقيت الصلاة
+  </a>
 
-    <a routerLink="/chapters" routerLinkActive="bg-green-100 rounded-lg" 
-       class="flex items-center gap-2 px-4 py-2 text-green-700 font-semibold hover:bg-green-200 transition">
-      <i class="fas fa-book-open text-lg"></i>
-      القرآن الكريم
-    </a>
-  </div>
+  <a routerLink="/chapters" routerLinkActive="bg-green-100 rounded-lg" 
+     (click)="isOpen=!isOpen"
+     class="flex items-center gap-2 px-4 py-2 text-green-700 font-semibold hover:bg-green-200 transition">
+    <i class="fas fa-book-open text-lg"></i>
+    القرآن الكريم
+  </a>
+</div>
+
 </nav>
