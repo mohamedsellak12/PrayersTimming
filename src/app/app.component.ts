@@ -4,10 +4,11 @@ import { PrayCartComponent } from "./pray-cart/pray-cart.component";
 import { PrayTimmingService } from './services/pray-timming.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { NavbarComponent } from "./navbar/navbar.component";
 
 @Component({
   selector: 'app-root',
-  imports: [PrayCartComponent , CommonModule , RouterOutlet ,RouterModule],
+  imports: [PrayCartComponent, CommonModule, RouterOutlet, RouterModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
