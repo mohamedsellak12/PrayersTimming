@@ -1,14 +1,15 @@
-<nav class="sticky w-full top-0 left-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md  shadow-lg transition-colors duration-300">
+<nav class="sticky w-full top-0 left-0 z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md  shadow-2xl transition-colors duration-300">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
 
       <!-- Links Desktop -->
-      <div class="hidden md:flex items-center space-x-6">
+      <div class="hidden md:flex items-center  space-x-6">
          <!-- Dark Mode Toggle Desktop -->
-        <button (click)="toggleDarkMode()"
-                class=" ml-4 p-2 max-w-3xl rounded bg-gray-500 dark:bg-green-600 hover:bg-gray-600 dark:hover:bg-green-500 transition">
-          <i class="fas" [ngClass]="darkMode ? 'fa-sun ' : 'fa-moon'"></i>
-        </button>
+       <button (click)="toggleDarkMode()"
+        class="ml-4 p-2 max-w-3xl rounded bg-gray-100  dark:bg-green-600 hover:bg-gray-300 dark:hover:bg-green-500 transition">
+ <i class="fas" [ngClass]="darkMode ? 'fa-sun ' : 'fa-moon'"></i>
+</button>
+
 
         <a routerLink="/" routerLinkActive="border-b-2 border-green-600" 
            [routerLinkActiveOptions]="{ exact: true }"
@@ -41,9 +42,9 @@
       </div>
 
       <!-- Logo -->
-      <div class="flex-shrink-0">
+      <div class="flex-shrink-0  border-b-2 p-2 rounded-2xl border-green-600 dark:border-green-400">
         <a routerLink="/" 
-           class="text-3xl font-extrabold text-green-600 dark:text-green-400 
+           class="text-3xl p-2  font-extrabold text-green-600 dark:text-green-400 
                   bg-gradient-to-r from-green-400 via-green-500 to-green-600 dark:from-gray-400 dark:to-gray-600
                   bg-clip-text text-transparent hover:scale-105 transition-transform">
           نور الإسلام
