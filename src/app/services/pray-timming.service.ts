@@ -68,6 +68,6 @@ export class PrayTimmingService {
   }
 
    getAllGodNames():Observable<any>{
-    return this.http.get(`http://api.aladhan.com/v1/asmaAlHusna`)
+    return this.http.get(`https://api.aladhan.com/v1/asmaAlHusna`)
   }
 }
