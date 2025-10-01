@@ -1,0 +1,21 @@
+<div *ngIf="loading" class="text-center text-gray-500">جاري تحديد موقعك...</div>
+<div *ngIf="error" class="text-center text-red-500">{{ error }}</div>
+
+<div *ngIf="qiblaDirection && !error" class="text-center">
+  <p class="text-green-700 dark:text-green-300">
+    اتجاه القبلة: {{ qiblaDirection | number:'1.0-2' }}°
+  </p>
+
+  <!-- Compass -->
+  <div class="mt-6 flex justify-center">
+    <div class="w-40 h-40 border-4 border-green-600 rounded-full flex items-center justify-center relative">
+      <!-- Arrow -->
+      <div class="w-1 h-16 bg-green-600 absolute bottom-1/2 transform origin-bottom transition-transform duration-300"
+           [style.transform]="'rotate(' + finalAngle + 'deg)'">
+      </div>
+    </div>
+  </div>
+  <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+    حرك هاتفك لتحديث الاتجاه
+  </p>
+</div>

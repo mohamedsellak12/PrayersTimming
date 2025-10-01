@@ -27,6 +27,7 @@ export class AppComponent implements OnInit  {
   isHadithRoute:boolean=false ;
   isNamesRoute:boolean=false ;
   isAzkasRoute:boolean=false ;
+  isQiblaRoute:boolean=false ;
   adhanMessage: string|null='';
   @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
@@ -52,6 +53,9 @@ export class AppComponent implements OnInit  {
     })
      this.router.events.subscribe(()=>{
       this.isAzkasRoute=this.router.url.includes("/azkar")
+    })
+     this.router.events.subscribe(()=>{
+      this.isQiblaRoute=this.router.url.includes("/qibla")
     })
     try{
       const location=await this.prayTimmingService.getCurrentLocation();

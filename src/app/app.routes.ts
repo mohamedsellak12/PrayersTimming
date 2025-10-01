@@ -7,6 +7,7 @@ import { BooksComponent } from './books/books.component';
 import { HadithsComponent } from './hadiths/hadiths.component';
 import { AsmaComponent } from './asma/asma.component';
 import { AzkarComponent } from './azkar/azkar.component';
+import { QiblaComponent } from './qibla/qibla.component';
 
 export const routes: Routes = [
     {
@@ -38,5 +39,9 @@ export const routes: Routes = [
         path:"azkar/:type",
         component:AzkarComponent,
         title:"Al azkar"
+    },{
+        path:'qibla',
+        component:QiblaComponent,
+        title:'Qibla'
     }
 ];
