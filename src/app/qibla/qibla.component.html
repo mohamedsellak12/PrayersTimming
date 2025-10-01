@@ -1,43 +1,60 @@
-<div class="p-6  mx-auto min-h-screen bg-gradient-to-b from-green-100 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
+<div class="p-6 sm:p-10 mx-auto min-h-screen 
+            bg-gradient-to-b from-green-100 via-white to-green-50 
+            dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 
+            flex items-center justify-center transition-colors duration-300">
 
-  <div *ngIf="loading" class="text-center py-6 text-gray-500 dark:text-gray-400 animate-pulse">
-    جاري تحديد موقعك...
-  </div>
+            <!-- Loading -->
+            <div *ngIf="loading" class="py-6 text-gray-500 dark:text-gray-400 animate-pulse">
+              جاري تحديد موقعك...
+            </div>
+  <div *ngIf="!loading && qiblaDirection" class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-green-100 dark:border-gray-700 p-6 sm:p-8 space-y-6 text-center">
 
-  <div *ngIf="error" class="text-center py-6 text-red-600 dark:text-red-400 font-semibold">
-    {{ error }}
-  </div>
 
-  <div *ngIf="qiblaDirection && !error" class="text-center flex flex-col items-center space-y-6">
-    
-    <!-- النص -->
-    <p class="text-lg sm:text-xl font-bold text-green-700 dark:text-green-300">
-      اتجاه القبلة: 
-      <span class="font-mono text-green-600 dark:text-green-400">
-        °{{ qiblaDirection | number:'1.0-2' }}
-      </span>
-    </p>
-
-    <!-- البوصلة -->
-    <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full shadow-lg 
-                bg-gradient-to-b from-green-100 to-green-200 
-                dark:from-gray-700 dark:to-gray-900 flex items-center justify-center">
-      
-      <!-- دائرة داخلية -->
-      <div class="absolute inset-6 rounded-full border-2 border-green-500 dark:border-green-400"></div>
-
-      <!-- سهم -->
-      <div class="w-1.5 h-20 sm:h-24 bg-green-600 dark:bg-green-400 rounded-full absolute bottom-1/2 origin-bottom transition-transform duration-500 ease-out"
-           [style.transform]="'rotate(' + finalAngle + 'deg)'">
-      </div>
-
-      <!-- نقطة الوسط -->
-      <div class="w-4 h-4 rounded-full bg-green-700 dark:bg-green-300 shadow-md"></div>
+    <!-- Error -->
+    <div *ngIf="error" class="py-6 text-red-600 dark:text-red-400 font-semibold">
+      {{ error }}
     </div>
 
-    <!-- ملاحظة -->
-    <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400 italic">
-      حرك هاتفك لتحديث الاتجاه
-    </p>
+    <!-- Content -->
+    <div *ngIf="qiblaDirection && !error" class="flex flex-col items-center space-y-6">
+
+      <!-- Location & Direction -->
+      <div>
+        <p class="text-lg sm:text-xl font-bold text-gray-700 dark:text-gray-300 flex items-center justify-center gap-2">
+          <i class="fas fa-location-dot text-green-600 dark:text-green-400 text-xl"></i>
+          <span>{{ city }}, {{ country }}</span>
+        </p>
+        <p class="mt-2 text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">
+          اتجاه القبلة:
+          <span class="font-mono text-green-600 dark:text-green-400">
+            °{{ qiblaDirection | number:'1.0-2' }}
+          </span>
+        </p>
+      </div>
+
+      <!-- Compass -->
+      <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full shadow-lg 
+                  bg-gradient-to-b from-green-100 to-green-200 
+                  dark:from-gray-700 dark:to-gray-900 
+                  flex items-center justify-center">
+
+        <!-- Circle inside -->
+        <div class="absolute inset-6 rounded-full border-2 border-green-500 dark:border-green-400"></div>
+
+        <!-- Arrow -->
+        <div class="w-1.5 h-20 sm:h-24 bg-green-600 dark:bg-green-400 rounded-full 
+                    absolute bottom-1/2 origin-bottom transition-transform duration-500 ease-out"
+             [style.transform]="'rotate(' + finalAngle + 'deg)'">
+        </div>
+
+        <!-- Center dot -->
+        <div class="w-4 h-4 rounded-full bg-green-700 dark:bg-green-300 shadow-md"></div>
+      </div>
+
+      <!-- Note -->
+      <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400 italic">
+        حرك هاتفك لتحديث الاتجاه
+      </p>
+    </div>
   </div>
 </div>

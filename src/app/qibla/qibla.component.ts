@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { QiblaService } from '../services/qibla.service';
 import { CommonModule } from '@angular/common';
+import { PrayTimmingService } from '../services/pray-timming.service';
 
 @Component({
   selector: 'app-qibla',
@@ -14,36 +15,53 @@ export class QiblaComponent implements OnInit ,OnDestroy {
   error: string | null = null;
   loading = true;
 
-  constructor(private qiblaService: QiblaService) {}
+  city:string=''
+  country:string=''
 
-  ngOnInit() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const lat = pos.coords.latitude;
-          const lon = pos.coords.longitude;
+  constructor(private qiblaService: QiblaService ,private prayTimmingService:PrayTimmingService) {}
 
-          this.qiblaService.getQibla(lat, lon).subscribe({
-            next: (res: any) => {
-              this.qiblaDirection = res.data.direction;
-              this.loading = false;
-              this.listenToCompass();
-            },
-            error: () => {
-              this.error = '⚠️ Unable to fetch Qibla direction.';
-              this.loading = false;
-            }
-          });
-        },
-        () => {
-          this.error = '⚠️ Location access denied.';
-          this.loading = false;
-        }
-      );
-    } else {
-      this.error = '⚠️ Geolocation not supported.';
-      this.loading = false;
-    }
+  async ngOnInit() {
+try{
+   const location=await this.prayTimmingService.getCurrentLocation();
+      if(location){
+        this.city=location.city;
+        this.country=location.country;
+        this.loading=false
+
+
+      }
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+      
+            this.qiblaService.getQibla(lat, lon).subscribe({
+              next: (res: any) => {
+                this.qiblaDirection = res.data.direction;
+                this.loading = false;
+                this.listenToCompass();
+              },
+              error: () => {
+                this.error = '⚠️ Unable to fetch Qibla direction.';
+                this.loading = false;
+              }
+            });
+          },
+          () => {
+            this.error = '⚠️ Location access denied.';
+            this.loading = false;
+          }
+        );
+      } else {
+        this.error = '⚠️ Geolocation not supported.';
+        this.loading = false;
+      }
+}catch(err){
+  console.log(err)
+}
+
   }
 
   listenToCompass() {
