@@ -28,7 +28,6 @@ try{
         this.country=location.country;
         this.loading=false
 
-
       }
 
       if (navigator.geolocation) {

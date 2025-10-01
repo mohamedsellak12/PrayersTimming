@@ -3,15 +3,21 @@
             dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 
             flex items-center justify-center transition-colors duration-300">
 
-            <!-- Loading -->
-            <div *ngIf="loading && !qiblaDirection" class="py-6 text-gray-500 dark:text-gray-400 animate-pulse">
-              جاري تحديد موقعك...
-            </div>
-  <div *ngIf="!loading && qiblaDirection" class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-green-100 dark:border-gray-700 p-6 sm:p-8 space-y-6 text-center">
+  <!-- Loading -->
+  <div *ngIf="loading && !qiblaDirection" 
+       class="py-6 text-lg font-semibold text-gray-600 dark:text-gray-400 animate-pulse">
+    جاري تحديد موقعك...
+  </div>
 
+  <!-- Main Card -->
+  <div *ngIf="!loading && qiblaDirection" 
+       class="w-full max-w-md bg-white dark:bg-gray-800 
+              rounded-2xl shadow-xl border border-green-100 dark:border-gray-700 
+              p-6 sm:p-8 space-y-6 text-center transition">
 
     <!-- Error -->
-    <div *ngIf="error" class="py-6 text-red-600 dark:text-red-400 font-semibold">
+    <div *ngIf="error" 
+         class="py-4 text-red-600 dark:text-red-400 font-semibold text-base sm:text-lg">
       {{ error }}
     </div>
 
@@ -19,12 +25,12 @@
     <div *ngIf="qiblaDirection && !error" class="flex flex-col items-center space-y-6">
 
       <!-- Location & Direction -->
-      <div>
+      <div class="space-y-2">
         <p class="text-lg sm:text-xl font-bold text-gray-700 dark:text-gray-300 flex items-center justify-center gap-2">
           <i class="fas fa-location-dot text-green-600 dark:text-green-400 text-xl"></i>
           <span>{{ city }}, {{ country }}</span>
         </p>
-        <p class="mt-2 text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">
+        <p class="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">
           اتجاه القبلة:
           <span class="font-mono text-green-600 dark:text-green-400">
             °{{ qiblaDirection | number:'1.0-2' }}
@@ -34,17 +40,20 @@
 
       <!-- Compass -->
       <div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full shadow-lg 
-                  bg-gradient-to-b from-green-100 to-green-200 
+                  bg-gradient-to-b from-green-50 to-green-100 
                   dark:from-gray-700 dark:to-gray-900 
                   flex items-center justify-center">
 
-        <!-- Circle inside -->
+        <!-- Inner circle -->
         <div class="absolute inset-6 rounded-full border-2 border-green-500 dark:border-green-400"></div>
 
-        <!-- Arrow -->
-        <div class="w-1.5 h-20 sm:h-24 bg-green-600 dark:bg-green-400 rounded-full 
-                    absolute bottom-1/2 origin-bottom transition-transform duration-500 ease-out"
+        <!-- Arrow (icon + line) -->
+        <div class="absolute bottom-1/2 origin-bottom transition-transform duration-500 ease-out flex flex-col items-center"
              [style.transform]="'rotate(' + finalAngle + 'deg)'">
+
+              <i class="fas fa-location-arrow text-4xl text-green-600 dark:text-green-400 absolute -top-6"
+     [style.transform]="'rotate(-45deg)'"></i>
+          <div class="w-1.5 h-14 sm:h-20 bg-green-600 dark:bg-green-400 rounded"></div>
         </div>
 
         <!-- Center dot -->

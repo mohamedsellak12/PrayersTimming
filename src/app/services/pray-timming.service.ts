@@ -9,7 +9,7 @@ export class PrayTimmingService {
   private apiUrl='https://api.aladhan.com/v1/timingsByCity/today'
   constructor(private http:HttpClient) { }
 
-  async getCurrentLocation():Promise<{city: string; country: string }>{
+  async getCurrentLocation():Promise<{city: string; country: string  ;latitude:number; longitude:number }>{
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
@@ -21,7 +21,7 @@ export class PrayTimmingService {
             );
             const city = response.results[0].components.city;
             const country = response.results[0].components.country;
-            resolve({ city, country });
+            resolve({ city, country ,latitude,longitude });
           } catch (error) {
             reject('Erreur lors de la conversion des coordonnées en ville.');
           }
