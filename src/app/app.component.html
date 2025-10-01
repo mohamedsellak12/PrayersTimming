@@ -61,12 +61,36 @@
   <!-- Prayer times list -->
   <div *ngIf="prayerTimes" class="mt-10 w-full max-w-6xl">
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8">
-      <li class="p-2"><app-pray-cart prayName="Fajr" prayNameAr="الفجر" [prayTime]="prayerTimes.timings.Fajr"></app-pray-cart></li>
-      <li class="p-2"><app-pray-cart prayName="Sunrise" prayNameAr="الشروق" [prayTime]="prayerTimes.timings.Sunrise"></app-pray-cart></li>
-      <li class="p-2"><app-pray-cart prayName="Dhuhr" prayNameAr="الظهر" [prayTime]="prayerTimes.timings.Dhuhr"></app-pray-cart></li>
-      <li class="p-2"><app-pray-cart prayName="Asr" prayNameAr="العصر" [prayTime]="prayerTimes.timings.Asr"></app-pray-cart></li>
-      <li class="p-2"><app-pray-cart prayName="Maghrib" prayNameAr="المغرب" [prayTime]="prayerTimes.timings.Maghrib"></app-pray-cart></li>
-      <li class="p-2"><app-pray-cart prayName="Isha" prayNameAr="العشاء" [prayTime]="prayerTimes.timings.Isha"></app-pray-cart></li>
+     <li class="p-2"
+    [ngClass]="{'bg-green-100 dark:bg-green-800 rounded-lg shadow-md border border-green-400': nextPrayer?.name === 'Fajr'}">
+  <app-pray-cart prayName="Fajr" prayNameAr="الفجر" [prayTime]="prayerTimes.timings.Fajr"></app-pray-cart>
+</li>
+
+<li class="p-2"
+    [ngClass]="{'bg-green-100 dark:bg-green-800 rounded-lg shadow-md border border-green-400': nextPrayer?.name === 'Sunrise'}">
+  <app-pray-cart prayName="Sunrise" prayNameAr="الشروق" [prayTime]="prayerTimes.timings.Sunrise"></app-pray-cart>
+</li>
+
+<li class="p-2"
+    [ngClass]="{'bg-green-100 dark:bg-green-800 rounded-lg shadow-md border border-green-400': nextPrayer?.name === 'Dhuhr'}">
+  <app-pray-cart prayName="Dhuhr" prayNameAr="الظهر" [prayTime]="prayerTimes.timings.Dhuhr"></app-pray-cart>
+</li>
+
+<li class="p-2"
+    [ngClass]="{'bg-green-100 dark:bg-green-800 rounded-lg shadow-md border border-green-400': nextPrayer?.name === 'Asr'}">
+  <app-pray-cart prayName="Asr" prayNameAr="العصر" [prayTime]="prayerTimes.timings.Asr"></app-pray-cart>
+</li>
+
+<li class="p-2"
+    [ngClass]="{'bg-green-100 dark:bg-green-800 rounded-lg shadow-md border border-green-400': nextPrayer?.name === 'Maghrib'}">
+  <app-pray-cart prayName="Maghrib" prayNameAr="المغرب" [prayTime]="prayerTimes.timings.Maghrib"></app-pray-cart>
+</li>
+
+<li class="p-2"
+    [ngClass]="{' rounded-lg shadow-md border-b-2 border-green-400': nextPrayer?.name === 'Isha'}">
+  <app-pray-cart prayName="Isha" prayNameAr="العشاء" [prayTime]="prayerTimes.timings.Isha"></app-pray-cart>
+</li>
+
     </ul>
   </div>
 

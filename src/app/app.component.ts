@@ -33,7 +33,6 @@ export class AppComponent implements OnInit  {
 
 
   constructor(private prayTimmingService:PrayTimmingService , private router:Router){
-
   }
    async ngOnInit() {
     this.router.events.subscribe(()=>{
@@ -63,8 +62,6 @@ export class AppComponent implements OnInit  {
         this.city=location.city;
         this.country=location.country;
         this.loading=false
-
-
       }
 
       this.prayTimmingService.getPrayerTimes(this.city,this.country).subscribe({
