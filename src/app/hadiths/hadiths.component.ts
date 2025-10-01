@@ -14,6 +14,7 @@ export class HadithsComponent implements OnInit {
   chapterId!: number;
    showScrollTop: boolean = false;
    showScrollBottom: boolean = false;
+   copiedIndex: number | null = null;
   hadiths: any[] = [];
   currentPage: number = 1;
   lastPage: number = 0;
@@ -93,6 +94,30 @@ export class HadithsComponent implements OnInit {
     behavior: 'smooth' 
   });
 }
+
+copyHadith(hadith: any, index: number) {
+  navigator.clipboard.writeText(hadith.hadithArabic).then(() => {
+    this.copiedIndex = index;
+    setTimeout(() => this.copiedIndex = null, 1500);
+  });
+}
+
+shareHadith(hadith: any) {
+  const textToShare = `📖 الحديث رقم ${hadith.hadithNumber}\n\n${hadith.hadithArabic}\n\nالحكم: ${this.translateStatus(hadith.status)} | المجلد: ${hadith.volume}`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: "📖 حديث نبوي",
+      text: textToShare
+    }).catch(err => console.error("Erreur partage:", err));
+  } else {
+    // Fallback si navigator.share n'est pas supporté
+    navigator.clipboard.writeText(textToShare).then(() => {
+      alert("تم النسخ في الحافظة لعدم دعم المشاركة ✅");
+    });
+  }
+}
+
 
 
   translateBookName(bookName: string): string {

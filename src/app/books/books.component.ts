@@ -24,7 +24,7 @@ constructor(private hadithService:HadithService){}
   getBooks(){
     this.hadithService.getBooks().subscribe({
       next:(res:any)=> {
-          this.books=res.books
+          this.books=res.books.filter((b:any)=>b.hadiths_count>0)
           console.log(res)
           this.loading=false
       },error:(err)=>{

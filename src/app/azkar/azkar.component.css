@@ -1,0 +1,7 @@
+@keyframes fade {
+  0%,100% { opacity: 0; }
+  10%,90% { opacity: 1; }
+}
+.animate-fade {
+  animation: fade 1.5s ease-in-out;
+}

@@ -93,9 +93,6 @@ export class AzkarComponent {
     })
   }
 
-  
-  
-
 
 copyZekr(z: any, index: number) {
   navigator.clipboard.writeText(z.zekr).then(() => {
@@ -106,6 +103,23 @@ copyZekr(z: any, index: number) {
     }, 1500); 
   });
 }
+
+shareZekr(zekr: any) {
+  const textToShare = `🕌 ذكر\n\n${zekr.zekr}\n\n${zekr.bless ? 'دعاء: ' + zekr.bless : ''}`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: "🕌 ذكر",
+      text: textToShare
+    }).catch(err => console.error("Erreur partage:", err));
+  } else {
+    // Fallback si navigator.share n'est pas supporté
+    navigator.clipboard.writeText(textToShare).then(() => {
+      alert("تم النسخ في الحافظة لعدم دعم المشاركة ✅");
+    });
+  }
+}
+
 
 
 

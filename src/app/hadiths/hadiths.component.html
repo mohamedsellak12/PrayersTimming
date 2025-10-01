@@ -31,22 +31,47 @@
 
   <!-- Hadiths List -->
   <div *ngIf="!loading && hadiths.length > 0" class="flex flex-col items-center gap-6">
-    <div *ngFor="let h of hadiths" 
-         class="w-full max-w-3xl p-4 sm:p-5 bg-white dark:bg-gray-800 rounded-xl text-center shadow hover:shadow-md transition border border-gray-200 dark:border-gray-600">
+ <div *ngFor="let h of hadiths; let i = index" 
+     class="relative w-full max-w-3xl p-6 pt-14 bg-white dark:bg-gray-800 rounded-xl text-center shadow hover:shadow-md transition border border-gray-200 dark:border-gray-600">
 
-      <p class="text-xs sm:text-sm text-gray-400 dark:text-green-300">الحديث رقم {{ h.hadithNumber }}</p>
+  <!-- Container boutons flottants en haut -->
+  <div class="absolute  top-3 left-3 flex gap-4">
+    <!-- Bouton نسخ -->
+    <button (click)="copyHadith(h, i)" title="نسخ"
+            class="px-2 py-1 bg-green-600 text-white rounded-md shadow hover:bg-green-700 transition flex items-center gap-1 text-xs sm:text-sm">
+      <i *ngIf="copiedIndex !== i" class="fas fa-copy"></i>
+      <i *ngIf="copiedIndex === i" class="fas fa-check-circle"></i>
+    </button>
 
-      <!-- Arabic text -->
-      <p class="mt-3 text-right font-arabic text-base sm:text-lg text-green-800 dark:text-gray-200 leading-loose">
-        {{ h.hadithArabic }}
-      </p>
+    <!-- Bouton مشاركة -->
+    <button (click)="shareHadith(h)" title="مشاركة"
+           class="p-2 bg-blue-600 text-white dark:bg-gray-300 dark:text-blue-600 rounded-md shadow hover:bg-blue-700 transition flex items-center justify-center">
+      <i class="fas fa-share-alt"></i>
+    </button>
+  </div>
 
-      <!-- Extra info -->
-      <div class="mt-4 flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs sm:text-sm text-gray-500 dark:text-gray-300 gap-2">
-        <span> الحكم: <strong class="text-green-600 dark:text-green-400">{{ translateStatus(h.status) }}</strong></span>
-        <span> المجلد: {{ h.volume }}</span>
-      </div>
-    </div>
+  <!-- Popup confirmation -->
+  <div *ngIf="copiedIndex === i" 
+       class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full bg-green-600 text-white text-xs sm:text-sm px-3 py-1 rounded shadow animate-fade flex items-center gap-2">
+    <i class="fas fa-check-circle"></i> تم النسخ !
+  </div>
+
+  <!-- Numéro du Hadith -->
+  <p class="text-xs sm:text-sm text-gray-400 dark:text-green-300">الحديث رقم {{ h.hadithNumber }}</p>
+
+  <!-- Arabic text -->
+  <p class="mt-3 text-right font-arabic text-base sm:text-lg text-green-800 dark:text-gray-200 leading-loose">
+    {{ h.hadithArabic }}
+  </p>
+
+  <!-- Extra info -->
+  <div class="mt-4 flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs sm:text-sm text-gray-500 dark:text-gray-300 gap-2">
+    <span> الحكم: <strong class="text-green-600 dark:text-green-400">{{ translateStatus(h.status) }}</strong></span>
+    <span> المجلد: {{ h.volume }}</span>
+  </div>
+</div>
+
+
 
     <!-- Pagination -->
     <div *ngIf="!loading && hadiths.length > 0" class="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4 w-full max-w-3xl">
