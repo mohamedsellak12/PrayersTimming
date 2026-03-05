@@ -15,6 +15,7 @@ export class SurahComponent implements OnInit {
 tafsirText: string = '';
 fullTafsir: string = '';
 showFullTafsir: boolean = false;
+loading:boolean=false
   id:any
   surahInfo: any;
   nextChapiter: string |null=null
@@ -42,6 +43,7 @@ showFullTafsir: boolean = false;
     })
   }
 ngOnInit(): void {
+  this.loading=true
  this.route.paramMap.subscribe(
     params=>{
       this.id=Number(params.get('id'))
@@ -52,9 +54,11 @@ ngOnInit(): void {
             text:verse.text_uthmani,
             number: Number(verse.verse_key.split(':')[1])
           }));
+          this.loading=false
         },
         error: (error) => {
           console.error('Error fetching surah', error);
+          this.loading=false
         }
       })
       this.qoranService.getSurahInfo(this.id).subscribe({
