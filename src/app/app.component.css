@@ -104,7 +104,9 @@ app-pray-cart {
     background-color: #c9302c;
     transform: scale(1.05);
 } */
-
+.font-quran {
+  font-family: 'Amiri', serif;
+}
 
 /* @media screen and (max-width: 668px) {
     .prayer-list {

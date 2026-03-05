@@ -1,0 +1,42 @@
+.font-quran {
+  font-family: 'Amiri', serif;
+}
+
+.ayah {
+  margin-left: 1px;
+}
+
+/* Ayah number base (mobile first) */
+.ayah-number {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 22px;
+  height: 22px;
+
+  border: 1.5px solid #16a34a;
+  border-radius: 50%;
+
+  font-size: 11px;
+  margin: 0 4px;
+  vertical-align: middle;
+}
+
+/* Tablet */
+@media (min-width: 640px) {
+  .ayah-number {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .ayah-number {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+}

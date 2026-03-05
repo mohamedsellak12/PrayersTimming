@@ -25,6 +25,10 @@ export class QoranService {
   search(query:string):Observable<any>{
     return this.http.get<any>(`${this.urlapi}/search?q=${query}`);
   }
+  getTafsir(surahId: number, ayahNumber: number) {
+  return this.http.get(`${this.urlapi}/tafsirs/15/by_ayah/${surahId}:${ayahNumber}`
+  );
+}
 
  
 }

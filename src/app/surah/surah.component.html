@@ -1,7 +1,7 @@
 <div class="min-h-screen p-4 md:p-8 bg-gradient-to-b from-green-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors">
 
   <!-- Info sur la sourate -->
-  <div class="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-xl shadow-md mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-gray-800 dark:text-gray-200">
+  <div class="w-full max-w-6xl mx-auto bg-white dark:bg-gray-800 p-4 md:p-6 rounded-xl shadow-md mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-gray-800 dark:text-gray-200">
     <div class="text-sm md:text-base">
       <a routerLink="/chapters" class="text-green-600 dark:text-green-400 hover:underline font-semibold">فهرس القرآن</a> | 
       سورة <span class="font-bold">{{ surahInfo?.name_arabic }}</span> | 
@@ -14,21 +14,132 @@
   </div>
 
   <!-- Contenu de la sourate -->
-  <div class="text-[1.3rem] font-extrabold text-gray-700 dark:text-gray-200 text-center leading-loose border border-gray-300 dark:border-gray-600 p-5 rounded-xl shadow-md">
-    <h1 class="text-xl md:text-2xl font-bold text-green-700 dark:text-green-400 mb-4 text-center" *ngIf="surahInfo?.name_arabic !== 'التوبة'">
-      <span *ngIf="surahInfo?.name_arabic !== 'الفاتحة'">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</span>
+<div class="w-full max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
+
+  <div class="text-gray-700 dark:text-gray-200
+              text-center leading-loose
+              border border-gray-300 dark:border-gray-600
+              p-4 sm:p-6 md:p-8
+              rounded-2xl shadow-md bg-white dark:bg-gray-900">
+
+    <!-- Basmala -->
+    <h1 class="text-lg sm:text-xl md:text-2xl 
+               font-bold text-green-700 dark:text-green-400 
+               mb-4"
+        *ngIf="surahInfo?.name_arabic !== 'التوبة'">
+      <span *ngIf="surahInfo?.name_arabic !== 'الفاتحة'">
+        بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+      </span>
     </h1>
-    <div class="max-w-5xl mx-auto">
-      <h2 >
-        {{ complateSurah }}
-      </h2>
+
+    <!-- Ayat -->
+    <div dir="rtl" class="mx-auto text-right 
+               
+                text-xl sm:text-2xl md:text-3xl lg:text-4xl
+                font-quran">
+
+      <p class="text-justify">
+        <ng-container *ngFor="let ayah of complateSurah">
+          <span  class=" ayah   leading-[1.7]
+         hover:bg-green-100/60 dark:hover:bg-green-800/60
+         transition-all duration-200
+         rounded-md px-1 
+         cursor-pointer"
+          (click)="selectAyah(ayah)"
+          >
+            {{ ayah.text }}
+            <span class="ayah-number">
+              {{ ayah.number }}
+            </span>
+          </span>
+
+        </ng-container>
+      </p>
+
     </div>
+
   </div>
 
+</div>
+
+<!-- Overlay -->
+<div *ngIf="selectedAyah"
+     (click)="closeTafsir()"
+     class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+
+  <!-- Modal -->
+  <div (click)="$event.stopPropagation()"
+       class="bg-white dark:bg-gray-900
+              w-full sm:w-[90%] md:w-[70%] lg:w-[55%]
+              max-h-[85vh] overflow-hidden
+              rounded-3xl shadow-2xl
+              flex flex-col">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between
+            p-4 border-b
+            border-gray-200 dark:border-gray-700">
+
+  <!-- Prev / Next -->
+  <div class="flex gap-2">
+    
+    <button (click)="nextAyah()"
+      class="px-3 py-1 text-sm rounded-lg
+             bg-gray-100 hover:bg-gray-200
+             dark:bg-gray-700 dark:hover:bg-gray-600
+             text-gray-700 dark:text-gray-200 transition">
+        ◀التالية
+    </button>
+
+    <button (click)="prevAyah()"
+      class="px-3 py-1 text-sm rounded-lg
+             bg-gray-100 hover:bg-gray-200
+             dark:bg-gray-700 dark:hover:bg-gray-600
+             text-gray-700 dark:text-gray-200 transition">
+      السابقة▶
+    </button>
+  </div>
+
+  <!-- Title -->
+  <h2 class="text-base sm:text-lg md:text-xl font-bold
+             text-gray-800 dark:text-gray-100 text-center flex-1">
+    تفسير الآية
+  </h2>
+
+  <!-- Close -->
+  <button (click)="closeTafsir()"
+          class="text-gray-500 hover:text-red-500
+                 text-xl font-bold transition">
+    ✕
+  </button>
+
+</div>
+
+    <!-- Content -->
+    <div class="p-5 overflow-y-auto
+                text-right leading-loose
+                text-sm sm:text-base md:text-lg
+                text-gray-700 dark:text-gray-200">
+
+      <div [innerHTML]="showFullTafsir ? fullTafsir : tafsirText"></div>
+
+      <!-- Lire plus -->
+      <button *ngIf="fullTafsir.length > 800"
+              (click)="toggleTafsir()"
+              class="mt-5 text-green-600 dark:text-green-400
+                     font-semibold text-sm hover:underline transition">
+        {{ showFullTafsir ? 'عرض أقل' : 'قراءة المزيد' }}
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
   <!-- Navigation entre les sourates -->
-  <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 mt-4">
+  <div class="w-full max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center mb-6 gap-4 mt-4">
     <button 
-      *ngIf="showScrollTop"
+      *ngIf="showScrollTop && !selectedAyah"
       (click)="scrollToTop()" 
       class="fixed bottom-5 right-5 px-4 py-3 bg-green-600 dark:bg-green-500 text-white rounded-full shadow-lg hover:bg-green-700 dark:hover:bg-green-600 transition text-lg z-50"
     >
@@ -46,7 +157,7 @@
   </div>
 
   <!-- Reciters -->
-  <div id="reciter" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+  <div id="reciter" dir="rtl" class="w-full max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
     <div *ngFor="let r of reciters" class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md flex flex-col items-center text-center gap-3">
       <img [src]="'/reciters/' + r.id + '.png'" class="w-20 h-20 object-cover rounded-full shadow-md" alt="{{ r.name }}">
       <p class="font-semibold text-gray-800 dark:text-gray-200">{{ r.name }}</p>

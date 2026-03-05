@@ -10,7 +10,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './surah.component.css'
 })
 export class SurahComponent implements OnInit {
-  complateSurah: string=''
+ complateSurah: any[] = [];
+ selectedAyah: number | null = null;
+tafsirText: string = '';
+fullTafsir: string = '';
+showFullTafsir: boolean = false;
   id:any
   surahInfo: any;
   nextChapiter: string |null=null
@@ -44,8 +48,10 @@ ngOnInit(): void {
       this.qoranService.getSurah(this.id).subscribe({
         next: (surah) => {
           this.complateSurah =surah.verses
-          .map((verse: any) => `${verse.text_uthmani} (${verse.verse_key.split(':')[1]})`)
-          .join(' ');
+          .map((verse: any) => ({
+            text:verse.text_uthmani,
+            number: Number(verse.verse_key.split(':')[1])
+          }));
         },
         error: (error) => {
           console.error('Error fetching surah', error);
@@ -116,6 +122,52 @@ navigateAndReload(nextId: number) {
     }, 500); // Délai pour permettre le scroll
 }
 
+selectAyah(ayah: any) {
+  this.selectedAyah = ayah.number;
+  this.showFullTafsir = false;
+
+  this.qoranService.getTafsir(this.id, ayah.number)
+    .subscribe((res: any) => {
+      this.fullTafsir = res.tafsir.text;
+
+      // Résumé (800 caractères)
+      this.tafsirText = this.fullTafsir.substring(0, 800);
+    });
+}
+prevAyah() {
+
+  if (this.selectedAyah == null) return;
+
+  const index = this.complateSurah.findIndex(
+    (a:any) => a.number === this.selectedAyah
+  );
+
+  if (index > 0) {
+    this.selectAyah(this.complateSurah[index - 1]);
+  }
+
+}
+
+nextAyah() {
+
+  if (this.selectedAyah == null) return;
+
+  const index = this.complateSurah.findIndex(
+    (a:any) => a.number === this.selectedAyah
+  );
+
+  if (index < this.complateSurah.length - 1) {
+    this.selectAyah(this.complateSurah[index + 1]);
+  }
+
+}
+
+toggleTafsir() {
+  this.showFullTafsir = !this.showFullTafsir;
+}
+closeTafsir(){
+  this.selectedAyah=null
+}
 
 
 
