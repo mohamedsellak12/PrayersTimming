@@ -32,7 +32,7 @@
   </p>
 
   <!-- Next prayer -->
-  <h3 class="text-xl font-semibold text-green-700 dark:text-green-400 mt-4">
+  <h3 class="text-xl font-semibold text-green-700 dark:text-green-400 mt-4 font-quran">
     {{ nextPrayer?.name==="Fajr" ? "الفجر":nextPrayer?.name==="Sunrise"?"الشروق":nextPrayer?.name==="Dhuhr"?"الظهر":nextPrayer?.name==="Asr"?"العصر":nextPrayer?.name==="Maghrib"?"المغرب":nextPrayer?.name==="Isha"?"العشاء":"" }}
   </h3>
   <h3 *ngIf="countdown" class="text-2xl sm:text-3xl font-mono text-gray-800 dark:text-gray-200 mt-3 tracking-wide">
@@ -59,9 +59,9 @@
   </h2>
 
   <!-- Prayer times list -->
-  <div *ngIf="prayerTimes" class="mt-10 w-full max-w-6xl">
+  <div dir="rtl" *ngIf="prayerTimes" class="mt-10 w-full max-w-6xl">
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8">
-     <li class="p-2"
+     <li class="p-2 "
     [ngClass]="{'bg-green-100 dark:bg-green-800 rounded-lg shadow-md border border-green-400': nextPrayer?.name === 'Fajr'}">
   <app-pray-cart prayName="Fajr" prayNameAr="الفجر" [prayTime]="prayerTimes.timings.Fajr"></app-pray-cart>
 </li>

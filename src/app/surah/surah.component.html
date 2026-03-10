@@ -1,17 +1,72 @@
 <div class="min-h-screen p-4 md:p-8 bg-gradient-to-b from-green-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors">
 
-  <!-- Info sur la sourate -->
-  <div class="w-full max-w-6xl mx-auto bg-white dark:bg-gray-800 p-4 md:p-6 rounded-xl shadow-md mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-gray-800 dark:text-gray-200">
-    <div class="text-sm md:text-base">
-      <a routerLink="/chapters" class="text-green-600 dark:text-green-400 hover:underline font-semibold">فهرس القرآن</a> | 
-      سورة <span class="font-bold">{{ surahInfo?.name_arabic }}</span> | 
-      {{ surahInfo?.revelation_place === 'makkah' ? 'مكية' : 'مدنية' }} | 
-      رقم السورة: {{ surahInfo?.id }} - عدد آياتها: {{ surahInfo?.verses_count }} - الاسم الإنجليزي: {{ surahInfo?.translated_name?.name }}
+<!-- 📖 Surah Info -->
+<div class="w-full max-w-6xl mx-auto 
+            bg-white dark:bg-gray-800 
+            border border-gray-200 dark:border-gray-700
+            rounded-2xl shadow-sm 
+            p-4 sm:p-5 md:p-6 mb-6">
+
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+    <!-- Left Info -->
+    <div class="flex flex-wrap items-center gap-2 text-sm sm:text-base text-gray-700 dark:text-gray-200">
+
+      <a routerLink="/chapters"
+         class="text-green-600 dark:text-green-400 font-semibold hover:underline">
+        فهرس القرآن
+      </a>
+
+      <span class="text-gray-400">|</span>
+
+      <span>
+        سورة <span class="font-bold text-xl font-quran">{{ surahInfo?.name_arabic }}</span>
+      </span>
+
+      <!-- Chips -->
+      <span class="px-2 py-1 text-xs rounded-full 
+                   bg-green-100 dark:bg-green-900
+                   text-green-700 dark:text-green-300">
+        {{ surahInfo?.revelation_place === 'makkah' ? 'مكية' : 'مدنية' }}
+      </span>
+
+      <span class="px-2 py-1 text-xs rounded-full 
+                   bg-gray-100 dark:bg-gray-700">
+        {{ surahInfo?.verses_count }} آية
+      </span>
+
+      <span class="px-2 py-1 text-xs rounded-full 
+                   bg-gray-100 dark:bg-gray-700">
+        رقم {{ surahInfo?.id }}
+      </span>
+
     </div>
-    <div>
-      <a (click)="scrollToSection('reciter')" class="text-green-600 dark:text-green-400 hover:underline font-semibold cursor-pointer">الإستماع</a>
+
+    <!-- Right Actions -->
+    <div class="flex items-center gap-3">
+
+      <span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+        {{ surahInfo?.translated_name?.name }}
+      </span>
+
+     <button (click)="scrollToSection('reciter')"
+        class="flex items-center gap-2
+               bg-green-600 hover:bg-green-700
+               text-white text-sm
+               px-4 py-2 rounded-lg
+               transition">
+
+  <i class="fas fa-headphones"></i>
+
+  الإستماع
+
+</button>
+
     </div>
+
   </div>
+
+</div>
 
   <!-- Contenu de la sourate -->
 <div class="w-full max-w-6xl mx-auto px-3 sm:px-6 lg:px-8">
